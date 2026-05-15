@@ -1,4 +1,4 @@
-<!-- FitFlow AI - Startup Ready FINAL -->
+<!-- FitFlow AI - FINAL PROFESSIONAL VERSION (Freeletics Level) -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -6,27 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FitFlow AI</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- FONT FIX -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">;600;700&display=swap
+
 
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
 
-
-    html { scroll-behavior: smooth; }
-
-
     body {
       font-family: 'Inter', sans-serif;
-      background: #f8fdf9;
-      color: #111;
+      background:#fff;
+      color:#111;
     }
+
+    html { scroll-behavior:smooth; }
+
 
     .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
+      max-width:1200px;
+      margin:auto;
+      padding:20px;
     }
 
+    /* NAV */
     .nav {
       display:flex;
       justify-content:space-between;
@@ -34,215 +36,205 @@
       padding:20px 0;
     }
 
+    .logo {
+      font-weight:700;
+      font-size:22px;
+    }
+
     .nav a {
       margin-left:20px;
       text-decoration:none;
       color:#333;
-      font-weight:500;
     }
 
+    /* HERO */
     .hero {
-      text-align:center;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      align-items:center;
+      gap:40px;
       padding:100px 20px;
     }
 
     .hero h1 {
-      font-size:58px;
+      font-size:52px;
       margin-bottom:20px;
     }
 
     .hero p {
       color:#555;
-      margin-bottom:10px;
+      margin-bottom:15px;
     }
 
+    /* BUTTON */
     .button {
-      display:inline-block;
-      margin-top:20px;
-      padding:16px 32px;
-      border-radius:12px;
       background:#16a34a;
       color:white;
+      padding:16px 30px;
+      border-radius:10px;
       text-decoration:none;
       font-weight:600;
-      box-shadow:0 8px 25px rgba(22,163,74,0.4);
-      transition:0.3s;
+      display:inline-block;
+      box-shadow:0 8px 25px rgba(0,0,0,0.15);
+      transition:all 0.2s ease;
     }
 
     .button:hover {
+      transform:translateY(-2px) scale(1.03);
       background:#15803d;
-      transform:translateY(-2px);
     }
 
-    .badge {
-      margin-top:15px;
-      color:#666;
+
+    /* TRUST */
+    .trust {
+      margin-top:20px;
+      color:#555;
     }
 
+
+    /* PHONE MOCKUP */
+    .phone {
+      background:#111;
+      color:white;
+      border-radius:30px;
+      padding:25px;
+      height:480px;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    /* FEATURES */
     .features {
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:20px;
-      margin:60px 0;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+      margin:80px 0;
     }
 
     .card {
-      background:white;
       padding:30px;
-      border-radius:16px;
-      box-shadow:0 8px 20px rgba(0,0,0,0.05);
-      text-align:center;
+      border-radius:12px;
+      border:1px solid #eee;
       transition:0.3s;
     }
 
     .card:hover { transform:translateY(-5px); }
 
 
-    .preview {
-      background:#111;
-      color:white;
-      padding:30px;
-      border-radius:16px;
-      max-width:500px;
-      margin:60px auto;
-      text-align:left;
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .section {
-      text-align:center;
+    /* SIGNUP */
+    .signup {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:40px;
       padding:80px 20px;
+      background:#f8fdf9;
     }
 
-    .pricing-card {
-      max-width:300px;
-      margin:auto;
-    }
-    .form-section {
-      background:#eaffea;
-      padding:80px 20px;
-    }
-
-    form {
-      max-width:500px;
-      margin:auto;
+    .form-box {
       background:white;
-      padding:35px;
+      padding:40px;
       border-radius:16px;
-      box-shadow:0 8px 20px rgba(0,0,0,0.05);
     }
 
     input, select {
       width:100%;
-      padding:14px;
-      margin-bottom:12px;
-      border-radius:10px;
+      padding:12px;
+      margin-bottom:10px;
+      border-radius:8px;
       border:1px solid #ddd;
     }
 
+    /* FOOTER */
     .footer {
       text-align:center;
       padding:40px;
       color:#777;
     }
 
-    @media (max-width:600px) {
+    /* MOBILE */
+    @media (max-width:900px) {
+      .hero { grid-template-columns:1fr; }
+      .signup { grid-template-columns:1fr; }
       .hero h1 { font-size:36px; }
     }
-
 
   </style>
 </head>
 
 <body>
 
+<!-- NAV -->
 <div class="container nav">
-  <div><strong>FitFlow AI</strong></div>
+  <div class="logo">FitFlow AI</div>
   <div>
     <a href="#features">Features</a>
-    <a href="#form">Start</a>
+    <a href="#signup">Start</a>
   </div>
 </div>
-
 
 <!-- HERO -->
-<div class="hero">
-  <h1>Word elke dag fitter — zonder nadenken 💪</h1>
-  <p>FitFlow AI stuurt jou automatisch je workouts via WhatsApp</p>
-  <p><strong>Geen apps. Geen planning. Gewoon doen.</strong></p>
+<div class="container hero">
+  <div>
+    <h1>De slimste manier om fitter te worden 💪</h1>
+    <p>Persoonlijke workouts en coaching via WhatsApp — elke dag opnieuw</p>
+    <p><strong>Geen discipline nodig. Geen gedoe. Gewoon resultaat.</strong></p>
 
 
-  <a href="#form" class="button">Start gratis trial 🚀</a>
+    <a href="#signup" class="button">Start gratis</a>
 
-  <div class="badge">
-    ✅ 3 dagen gratis • ✅ Start binnen 1 minuut • ✅ Geen verplichting
+
+    <div class="trust">
+      ✅ 3 dagen gratis trial<br>
+      ✅ Geen abonnement verplicht<br>
+      ✅ Start binnen 1 minuut
+    </div>
+  </div>
+
+
+  <div class="phone">
+    <div style="text-align:center; margin-bottom:10px;">WhatsApp</div>
+    🔥 Goedemorgen Marco ✅<br><br>
+    🏋️ Upper Body Workout<br><br>
+    • Push-ups — 4x12<br>
+    • Pull-ups — 3x8<br>
+    • Shoulder press — 3x10<br><br>
+    💡 Tip: Focus op techniek<br><br>
+    🔥 Motivatie: Consistentie wint<br><br>
+    ✅ Stuur DONE
   </div>
 </div>
-
-
-<!-- PROBLEEM -->
-<div class="section">
-  <h2>Waarom FitFlow?</h2>
-  <p>De meeste mensen stoppen met trainen omdat ze geen plan hebben.</p>
-  <p><strong>FitFlow lost dat op — automatisch.</strong></p>
-</div>
-
 
 <!-- FEATURES -->
 <div class="container features" id="features">
-  <div class="card">📋 Dagelijks schema</div>
-  <div class="card">🔥 Motivatie</div>
-  <div class="card">🎯 Coaching</div>
-  <div class="card">⏰ Reminders</div>
-</div>
+  <div class="card">
+    <h3>AI Personal Coach</h3>
+    <p>Dagelijks aangepast op jouw doel</p>
+  </div>
 
 
-<!-- WHATSAPP PREVIEW -->
-<div class="preview">
-<span style="color:#25D366; font-weight:bold;">WhatsApp</span><br><br>
+  <div class="card">
+    <h3>Smart Workouts</h3>
+    <p>Nooit meer nadenken wat je moet doen</p>
+  </div>
 
-🔥 Goedemorgen Marco!<br><br>
 
-🏋️ Vandaag: Upper Body<br><br>
-
-• Push-ups – 4x12<br>
-• Pull-ups – 3x8<br>
-• Shoulder press – 3x10<br><br>
-
-💡 Tip: Focus op techniek<br><br>
-
-🔥 Motivatie: Consistentie wint altijd<br><br>
-
-✅ Stuur <b>DONE</b> als je klaar bent
-</div>
-
-<!-- SOCIAL PROOF -->
-<div class="section">
-  <p>⭐⭐⭐⭐⭐ “Nog nooit zo consistent geweest met trainen”</p>
-  <p>⭐⭐⭐⭐⭐ “Voelt als een personal trainer in mijn broekzak”</p>
-</div>
-
-<!-- PRICING -->
-<div class="section">
-  <h2>Prijs</h2>
-  <div class="card pricing-card">
-    <h3>Pro Plan</h3>
-    <p style="font-size:30px;">€9 / maand</p>
-    <p>Dagelijkse coaching via WhatsApp</p>
-    <p>Persoonlijk schema</p>
-    <p>Motivatie & reminders</p>
+  <div class="card">
+    <h3>Motivatie</h3>
+    <p>Blijf consistent zonder discipline problemen</p>
   </div>
 </div>
-<!-- FORM -->
-<div id="form" class="form-section">
-  <form>
-    <h2 style="text-align:center; margin-bottom:20px;">Start jouw traject</h2>
 
-    <p style="text-align:center; color:#555; margin-bottom:20px;">Sluit je aan bij 100+ gebruikers 🔥</p>
+<!-- SIGNUP -->
+<div id="signup" class="container signup">
+  <div>
+    <h2>Start vandaag</h2>
+    <p>Gratis trial • Geen verplichting</p>
+  </div>
 
-    <input type="text" placeholder="Naam" required>
-    <input type="text" placeholder="WhatsApp nummer" required>
+  <div class="form-box">
+    <input placeholder="Naam">
+    <input placeholder="WhatsApp nummer">
+
 
     <select>
       <option>Doel</option>
@@ -263,18 +255,13 @@
       <option>5</option>
     </select>
 
-    <select>
-      <option>Locatie</option>
-      <option>Thuis</option>
-      <option>Gym</option>
-    </select>
-
-    <a href="#" class="button" style="width:100%; text-align:center;">Start gratis 🚀</a>
-  </form>
+    <a href="#" class="button" style="width:100%; text-align:center">Start gratis</a>
+  </div>
 </div>
 
+<!-- FOOTER -->
 <div class="footer">
-© 2026 FitFlow AI — Startup ready
+© 2026 FitFlow AI
 </div>
 
 </body>
