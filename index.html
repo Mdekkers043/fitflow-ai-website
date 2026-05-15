@@ -11,6 +11,10 @@
 * {margin:0;padding:0;box-sizing:border-box;}
 body {font-family:'Inter',sans-serif;background:#f4f9f5;color:#111;}
 
+html {
+  scroll-behavior: smooth;
+}
+
 .container {
   max-width:1200px;
   margin:auto;
@@ -65,7 +69,7 @@ body {font-family:'Inter',sans-serif;background:#f4f9f5;color:#111;}
   line-height:1.7;
 }
 
-/* SECTIONS (meer spacing!) */
+/* SECTIONS */
 .section {
   margin-top:180px;
 }
@@ -114,6 +118,16 @@ body {font-family:'Inter',sans-serif;background:#f4f9f5;color:#111;}
   padding:60px;
   color:#777;
 }
+
+input {
+  font-size:15px;
+}
+
+input:focus {
+  outline:none;
+  border:1px solid #22c55e;
+  box-shadow:0 0 0 2px rgba(34,197,94,0.2);
+}
 </style>
 </head>
 
@@ -132,7 +146,8 @@ body {font-family:'Inter',sans-serif;background:#f4f9f5;color:#111;}
 
     <p>Jij hoeft alleen te trainen.</p>
 
-    <a href="#" class="button">Start binnen 30 seconden 🚀</a>
+    <!-- ✅ SCROLL BUTTON -->
+    <a href="#signup" class="button">Start binnen 30 seconden 🚀</a>
   </div>
 
   <div class="mockup">
@@ -216,11 +231,104 @@ body {font-family:'Inter',sans-serif;background:#f4f9f5;color:#111;}
   </div>
 </div>
 
-<!-- CTA -->
-<div class="cta">
+<!-- ✅ CTA + SIGNUP -->
+<div class="cta" id="signup">
   <h2>Stop met nadenken. Begin met trainen.</h2>
   <p>Start vandaag en ontvang direct jouw eerste workout.</p>
-  <a href="#" class="button">Start gratis</a>
+
+  <form id="onboardingForm" style="max-width:400px;margin:30px auto 0;">
+
+  <p style="font-weight:600;margin-bottom:10px;">
+    Binnen 30 seconden gestart ✅
+  </p>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <p style="margin-bottom:6px;"><strong>Doel</strong></p>
+    <select required style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+      <option value="">Kies...</option>
+      <option>Afvallen</option>
+      <option>Spieropbouw</option>
+    </select>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" style="display:none;">
+    <p style="margin-bottom:6px;"><strong>Niveau</strong></p>
+    <select required style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+      <option value="">Kies...</option>
+      <option>Beginner</option>
+      <option>Advanced</option>
+    </select>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" style="display:none;">
+    <p style="margin-bottom:6px;"><strong>Dagen per week</strong></p>
+    <input type="number" min="1" max="7" required
+      style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step" style="display:none;">
+    <p style="margin-bottom:6px;"><strong>Locatie</strong></p>
+    <select required style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+      <option value="">Kies...</option>
+      <option>Thuis</option>
+      <option>Gym</option>
+    </select>
+  </div>
+
+  <!-- FINAL -->
+  <div id="finalFields" style="display:none;">
+    <input type="text" name="name" placeholder="Naam (bijv. Marco)" required
+      style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+
+    <input type="tel" name="phone" placeholder="WhatsApp (bijv. +31612345678)" required
+      style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+
+    <button type="submit" class="button" style="width:100%;">
+      Ontvang mijn eerste workout 🚀
+    </button>
+  </div>
+
+  <!-- NEXT BUTTON -->
+  <button type="button" id="nextBtn" class="button" style="width:100%;margin-top:10px;">
+    Volgende →
+  </button>
+
+  <p style="font-size:13px;color:#666;margin-top:10px;">
+    ✅ Gratis • Geen spam • Direct starten
+  </p>
+
+</form>
+
+<script>
+const steps = document.querySelectorAll(".step");
+const nextBtn = document.getElementById("nextBtn");
+const finalFields = document.getElementById("finalFields");
+
+let currentStep = 0;
+
+nextBtn.addEventListener("click", () => {
+  const inputs = steps[currentStep].querySelectorAll("input, select");
+
+  for (let input of inputs) {
+    if (!input.value) return;
+  }
+
+  steps[currentStep].style.display = "none";
+  currentStep++;
+
+  if (currentStep < steps.length) {
+    steps[currentStep].style.display = "block";
+  } else {
+    nextBtn.style.display = "none";
+    finalFields.style.display = "block";
+  }
+});
+</script>
+
 </div>
 
 </div>
@@ -231,3 +339,4 @@ body {font-family:'Inter',sans-serif;background:#f4f9f5;color:#111;}
 
 </body>
 </html>
+``
