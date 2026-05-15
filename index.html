@@ -1,4 +1,4 @@
-<!-- FitFlow AI - Premium HTML Landing Page (lokaal + GitHub klaar) -->
+<!-- FitFlow AI - Startup Ready HTML Landing Page -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -6,21 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FitFlow AI</title>
 
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * { box-sizing: border-box; margin:0; padding:0; }
-
-
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Inter', sans-serif;
       background: #f8fdf9;
       color: #111;
-      line-height: 1.6;
     }
-
 
     .container {
       max-width: 1100px;
@@ -28,256 +22,232 @@
       padding: 20px;
     }
 
-
-    /* NAVBAR */
     .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 0;
     }
-
-
-    .logo {
-      font-weight: 700;
-      font-size: 20px;
-    }
-
 
     .nav a {
-      text-decoration: none;
-      margin-left: 20px;
-      color: #333;
+      margin-left:20px;
+      text-decoration:none;
+      color:#333;
+      font-weight:500;
     }
 
-
-    /* HERO */
     .hero {
-      text-align: center;
-      padding: 100px 20px;
+      text-align:center;
+      padding:100px 20px;
     }
 
     .hero h1 {
-      font-size: 56px;
-      margin-bottom: 20px;
+      font-size:58px;
+      margin-bottom:20px;
     }
-
 
     .hero p {
-      font-size: 18px;
-      color: #555;
-      margin-bottom: 25px;
+      color:#555;
+      margin-bottom:10px;
     }
 
-
     .button {
-      display: inline-block;
-      background: #16a34a;
-      color: white;
-      padding: 16px 32px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
+      display:inline-block;
+      margin-top:20px;
+      padding:16px 32px;
+      border-radius:12px;
+      background:#16a34a;
+      color:white;
+      text-decoration:none;
+      font-weight:600;
+      box-shadow:0 8px 25px rgba(22,163,74,0.4);
+      transition:0.3s;
     }
 
     .button:hover {
-      background: #15803d;
+      background:#15803d;
+      transform:translateY(-2px);
     }
-    /* FEATURES */
+
+    .badge {
+      margin-top:15px;
+      color:#666;
+    }
+
     .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin: 60px 0;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+      margin:60px 0;
     }
 
     .card {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      text-align: center;
-      transition: 0.3s;
+      background:white;
+      padding:30px;
+      border-radius:16px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.05);
+      text-align:center;
+      transition:0.3s;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .icon {
-      font-size: 30px;
-      margin-bottom: 10px;
+    .card:hover { transform:translateY(-5px); }
+    .preview {
+      background:#111;
+      color:white;
+      padding:30px;
+      border-radius:16px;
+      max-width:500px;
+      margin:60px auto;
+      text-align:left;
+      font-size:14px;
     }
 
-
-    /* HOW */
     .section {
-      padding: 80px 20px;
-      text-align: center;
+      text-align:center;
+      padding:80px 20px;
     }
 
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 40px;
-    }
 
-    /* TESTIMONIAL */
-    .testimonials {
-      background: #fff;
-      padding: 60px 20px;
-      margin-top: 60px;
-    }
-
-    .testimonial {
-      max-width: 600px;
-      margin: 20px auto;
-      font-style: italic;
-      color: #444;
-    }
-    /* FORM */
     .form-section {
-      background: #eaffea;
-      padding: 80px 20px;
+      background:#eaffea;
+      padding:80px 20px;
     }
-
 
     form {
-      max-width: 500px;
-      margin: auto;
-      background: white;
-      padding: 35px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      max-width:500px;
+      margin:auto;
+      background:white;
+      padding:35px;
+      border-radius:16px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.05);
     }
 
     input, select {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 12px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
+      width:100%;
+      padding:14px;
+      margin-bottom:12px;
+      border-radius:10px;
+      border:1px solid #ddd;
     }
 
-    /* FOOTER */
     .footer {
-      text-align: center;
-      padding: 40px;
-      font-size: 14px;
-      color: #777;
+      text-align:center;
+      padding:40px;
+      color:#777;
     }
-
 
   </style>
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <div class="nav container">
-    <div class="logo">FitFlow AI</div>
-    <div>
-      <a href="#features">Features</a>
-      <a href="#how">Hoe werkt het</a>
-      <a href="#form">Start</a>
-    </div>
+<div class="container nav">
+  <div><strong>FitFlow AI</strong></div>
+  <div>
+    <a href="#features">Features</a>
+    <a href="#form">Start</a>
   </div>
-  <!-- HERO -->
-  <div class="hero container">
-    <h1>Jouw AI Fitness Coach 💪</h1>
-    <p>Automatisch trainingsschema, motivatie en coaching via WhatsApp</p>
-    <a href="#form" class="button">Start gratis trial 🚀</a>
+</div>
+<div class="hero">
+  <h1>Word elke dag fitter — zonder nadenken 💪</h1>
+  <p>FitFlow AI stuurt jou automatisch je workouts via WhatsApp</p>
+  <p><strong>Geen apps. Geen planning. Gewoon doen.</strong></p>
+  <a href="#form" class="button">Start gratis trial 🚀</a>
+
+
+  <div class="badge">
+    ✅ 3 dagen gratis • ✅ Start binnen 1 minuut • ✅ Geen verplichting
   </div>
+</div>
+<!-- FEATURES -->
+<div class="container features" id="features">
+  <div class="card">📋 Dagelijks schema</div>
+  <div class="card">🔥 Motivatie</div>
+  <div class="card">🎯 Coaching</div>
+  <div class="card">⏰ Reminders</div>
+</div>
+<!-- WHATSAPP PREVIEW -->
+<div class="preview">
+<span style="color:#25D366; font-weight:bold;">WhatsApp</span><br><br>
 
-  <!-- FEATURES -->
-  <div class="container" id="features">
-    <div class="features">
-      <div class="card">
-        <div class="icon">📋</div>
-        <h3>Dagelijks schema</h3>
-        <p>Altijd een persoonlijk plan klaar</p>
-      </div>
-      <div class="card">
-        <div class="icon">🔥</div>
-        <h3>Motivatie</h3>
-        <p>Elke dag nieuwe energie</p>
-      </div>
-      <div class="card">
-        <div class="icon">🎯</div>
-        <h3>Coaching</h3>
-        <p>Persoonlijke tips om sneller te groeien</p>
-      </div>
-      <div class="card">
-        <div class="icon">⏰</div>
-        <h3>Reminders</h3>
-        <p>Nooit meer je workout missen</p>
-      </div>
-    </div>
-  </div>
-  <!-- HOW -->
-  <div class="section" id="how">
-    <h2>Hoe werkt het?</h2>
-    <div class="steps container">
-      <div class="card">
-        <h3>1. Aanmelden</h3>
-        <p>Vul je doelen in</p>
-      </div>
-      <div class="card">
-        <h3>2. AI maakt plan</h3>
-        <p>Jouw persoonlijke schema</p>
-      </div>
-      <div class="card">
-        <h3>3. Coaching</h3>
-        <p>Dagelijks via WhatsApp</p>
-      </div>
-    </div>
-  </div>
+🔥 Goedemorgen Marco!<br><br>
 
-  <!-- TESTIMONIAL -->
-  <div class="testimonials">
-    <div class="testimonial">⭐⭐⭐⭐⭐ “Dit voelt alsof ik een personal trainer heb, maar dan gratis via WhatsApp”</div>
-    <div class="testimonial">⭐⭐⭐⭐⭐ “Nog nooit zo consistent geweest met trainen”</div>
-  </div>
-  <!-- FORM -->
-  <div class="form-section" id="form">
-    <form>
-      <h2 style="text-align:center; margin-bottom:20px;">Start jouw traject</h2>
-      <input type="text" placeholder="Naam" required>
-      <input type="text" placeholder="WhatsApp nummer" required>
+🏋️ Vandaag: Upper Body<br><br>
 
-      <select>
-        <option>Doel</option>
-        <option>Afvallen</option>
-        <option>Spieropbouw</option>
-      </select>
+• Push-ups – 4x12<br>
+• Pull-ups – 3x8<br>
+• Shoulder press – 3x10<br><br>
 
-      <select>
-        <option>Niveau</option>
-        <option>Beginner</option>
-        <option>Advanced</option>
-      </select>
+💡 Tip: Focus op techniek<br><br>
 
-      <select>
-        <option>Dagen per week</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
+🔥 Motivatie: Consistentie wint altijd<br><br>
 
-      <select>
-        <option>Locatie</option>
-        <option>Thuis</option>
-        <option>Gym</option>
-      </select>
+✅ Stuur <b>DONE</b> als je klaar bent
+</div>
 
-      <a href="#" class="button" style="width:100%; text-align:center;">Start gratis 🚀</a>
-    </form>
-  </div>
 
-  <!-- FOOTER -->
-  <div class="footer">
-    © 2026 FitFlow AI — All rights reserved
-  </div>
+<!-- SOCIAL PROOF -->
+<div class="section">
+  <p>⭐⭐⭐⭐⭐ “Nog nooit zo consistent geweest met trainen”</p>
+  <p>⭐⭐⭐⭐⭐ “Voelt als een personal trainer in mijn broekzak”</p>
+</div>
+
+
+<!-- FORM -->
+<div id="form" class="form-section">
+  <form>
+    <h2 style="text-align:center; margin-bottom:20px;">Start jouw traject</h2>
+
+
+    <p style="text-align:center; color:#555; margin-bottom:20px;">Sluit je aan bij 100+ gebruikers 🔥</p>
+
+
+    <input type="text" placeholder="Naam" required>
+    <input type="text" placeholder="WhatsApp nummer" required>
+
+
+    <select>
+      <option>Doel</option>
+      <option>Afvallen</option>
+      <option>Spieropbouw</option>
+    </select>
+
+
+    <select>
+      <option>Niveau</option>
+      <option>Beginner</option>
+      <option>Advanced</option>
+    </select>
+
+
+    <select>
+      <option>Dagen per week</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+
+
+    <select>
+      <option>Locatie</option>
+      <option>Thuis</option>
+      <option>Gym</option>
+    </select>
+
+
+    <a href="#" class="button" style="width:100%; text-align:center;">Start gratis 🚀</a>
+  </form>
+</div>
+
+
+<div class="section">
+  <h2>Waarom FitFlow?</h2>
+  <p>De meeste mensen stoppen met trainen omdat ze geen plan hebben.</p>
+  <p><strong>FitFlow lost dat op — automatisch.</strong></p>
+</div>
+
+© 2026 FitFlow AI — Startup prototype
+</div>
+
 
 </body>
