@@ -1,4 +1,4 @@
-<!-- FitFlow AI - NEW FLOW (Centered Signup + Step Screen) -->
+<!-- FitFlow AI - Landing Page + Centered Onboarding -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -6,109 +6,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FitFlow AI</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#fff;color:#111}
-.container{max-width:900px;margin:auto;padding:20px}
-.center-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center}
-
-
-.card{
-  width:100%;
-  max-width:500px;
-  background:white;
-  padding:40px;
-  border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
-}
-
-
-h1{font-size:34px;margin-bottom:10px}
-p{color:#555;margin-bottom:20px}
-
-
-input,select{
-  width:100%;
-  padding:14px;
-  margin-bottom:10px;
-  border-radius:10px;
-  border:1px solid #ddd;
-}
+body{font-family:'Inter',sans-serif;background:#f8fdf9;color:#111}
+.container{max-width:1100px;margin:auto;padding:20px}
+.hero{text-align:center;padding:100px 20px}
+.hero h1{font-size:50px;margin-bottom:20px}
+.hero p{color:#555;margin-bottom:15px}
 
 
 .button{
-  width:100%;
-  background:#16a34a;
-  color:white;
-  padding:14px;
-  border-radius:10px;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.2s;
+  background:#16a34a;color:white;padding:16px 30px;border-radius:10px;
+  text-decoration:none;font-weight:600;display:inline-block;margin-top:20px;
 }
 
+.features{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;margin:80px 0;
+}
+.card{
+  background:white;padding:30px;border-radius:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.05);text-align:center;
+}
+/* CENTER ONBOARDING */
+.center-section{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:100px 20px;
+}
+.form-card{
+  width:100%;max-width:500px;background:white;
+  padding:40px;border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  text-align:center;
+}
 
-.button:hover{transform:scale(1.03)}
-
+input,select{
+  width:100%;padding:14px;margin-bottom:10px;
+  border-radius:10px;border:1px solid #ddd;
+}
 
 .hidden{display:none}
 
-
-.progress{font-size:14px;color:#888;margin-bottom:10px}
+.footer{text-align:center;padding:40px;color:#777}
 </style>
 </head>
 
-
 <body>
 
-<!-- MAIN SCREEN -->
-<div id="screen1" class="center-screen">
-  <div class="card">
-    <h1>Start jouw traject 💪</h1>
-    <p>Beantwoord 3 vragen en krijg jouw persoonlijke plan</p>
-    <div class="progress">Stap 1 van 3</div>
+<!-- HERO -->
+<div class="hero container">
+  <h1>De slimste manier om fitter te worden 💪</h1>
+  <p>Automatisch workouts, motivatie en coaching via WhatsApp</p>
+  <p><strong>Geen apps. Geen planning. Gewoon doen.</strong></p>
+  #signupStart gratis</a>
+</div>
+
+
+<!-- FEATURES -->
+<div class="container features">
+  <div class="card">📋 Dagelijks schema</div>
+  <div class="card">🔥 Motivatie</div>
+  <div class="card">🎯 Coaching</div>
+  <div class="card">⏰ Reminders</div>
+</div>
+
+
+<!-- CENTERED ONBOARDING -->
+<div class="center-section" id="signup">
+
+
+  <!-- STEP 1 -->
+  <div id="step1" class="form-card">
+    <h2>Start jouw traject 💪</h2>
+    <p>Beantwoord 3 vragen en ontvang jouw plan</p>
+
+
     <select id="goal">
       <option value="">Kies doel</option>
       <option>Afvallen</option>
       <option>Spieropbouw</option>
     </select>
+
+
     <select id="level">
       <option value="">Kies niveau</option>
       <option>Beginner</option>
       <option>Advanced</option>
     </select>
+
+
     <select id="days">
       <option value="">Dagen per week</option>
       <option>3</option>
       <option>4</option>
       <option>5</option>
     </select>
-    <button class="button" onclick="goNext()">Ga verder →</button>
+
+
+    <button class="button" onclick="nextStep()">Ga verder →</button>
   </div>
-</div>
-<!-- SECOND SCREEN -->
-<div id="screen2" class="center-screen hidden">
-  <div class="card">
-    <h1>Bijna klaar 🚀</h1>
-    <p>Voer je gegevens in en start direct</p>
-    <div class="progress">Laatste stap</div>
-    <input type="text" placeholder="Naam" id="name">
-    <input type="text" placeholder="WhatsApp nummer" id="phone">
+
+  <!-- STEP 2 -->
+  <div id="step2" class="form-card hidden">
+    <h2>Bijna klaar 🚀</h2>
+    <p>Vul je gegevens in</p>
+    <input id="name" placeholder="Naam">
+    <input id="phone" placeholder="WhatsApp nummer">
 
 
     <button class="button" onclick="finish()">Start gratis</button>
   </div>
+
+
 </div>
 
+<!-- FOOTER -->
+<div class="footer">
+© 2026 FitFlow AI
+</div>
+
+
 <script>
-function goNext(){
+function nextStep(){
   let goal = document.getElementById('goal').value;
   let level = document.getElementById('level').value;
   let days = document.getElementById('days').value;
+
+
   if(goal && level && days){
-    document.getElementById('screen1').classList.add('hidden');
-    document.getElementById('screen2').classList.remove('hidden');
+    document.getElementById('step1').classList.add('hidden');
+    document.getElementById('step2').classList.remove('hidden');
   } else {
     alert('Vul alle vragen in ✅');
   }
@@ -117,8 +148,13 @@ function goNext(){
 function finish(){
   let name = document.getElementById('name').value;
   let phone = document.getElementById('phone').value;
+
+
   if(name && phone){
-    alert('✅ Je bent aangemeld! (mock)');
+    document.getElementById('step2').innerHTML = `
+  <h2>✅ Je plan komt eraan</h2>
+  <p>Check je WhatsApp binnen enkele minuten</p>
+`;
   } else {
     alert('Vul je gegevens in');
   }
