@@ -1,3 +1,5 @@
+
+
 <!-- FitFlow AI - Landing + Separate Onboarding Page -->
 <!DOCTYPE html>
 <html lang="nl">
@@ -5,8 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FitFlow AI</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -41,13 +42,19 @@ body{font-family:'Inter',sans-serif;background:#f8fdf9;color:#111}
 /* CTA BOTTOM */
 .cta-bottom{text-align:center;padding:80px 20px}
 /* ONBOARDING PAGE */
-.onboarding-page{
-  position:fixed;
-  top:0;left:0;width:100%;height:100%;
-  background:#f8fdf9;
-  display:none;
-  justify-content:center;
-  align-items:center;
+
+.onboarding-page {
+  animation: fadeIn 0.25s ease;
+}
+<div style="position:absolute;top:20px;right:20px;cursor:pointer;font-size:20px;" onclick="closeOnboarding()">✕</div>
+function closeOnboarding(){
+  document.getElementById('onboarding').style.display='none';
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .form-card{
