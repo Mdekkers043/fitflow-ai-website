@@ -10,12 +10,22 @@
 <style>
 * {margin:0;padding:0;box-sizing:border-box;}
 body {
-  background-image: url('background.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+  font-family:'Inter',sans-serif;
+  color:#fff;
 
+  background-image: url('background.png');
+  background-size: cover;        /* vult scherm zonder vervormen */
+  background-position: center;   /* netjes gecentreerd */
+  background-repeat: no-repeat;  /* geen herhaling */
+  background-attachment: fixed;  /* 🔥 dit zorgt dat image stil blijft */
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: -1;
+}
 
 html {
   scroll-behavior: smooth;
