@@ -1,4 +1,4 @@
-<!-- FitFlow AI - FINAL PROFESSIONAL VERSION (Freeletics Level) -->
+<!-- FitFlow AI - FINAL PROFESSIONAL VERSION WITH MULTI-STEP ONBOARDING -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -6,260 +6,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FitFlow AI</title>
 
-  <!-- FONT FIX -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">;600;700&display=swap
-
-
+  https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background:#fff;
-      color:#111;
-    }
-
+    body { font-family:'Inter',sans-serif; background:#fff; color:#111; }
     html { scroll-behavior:smooth; }
 
-
-    .container {
-      max-width:1200px;
-      margin:auto;
-      padding:20px;
-    }
-
-    /* NAV */
-    .nav {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:20px 0;
-    }
-
-    .logo {
-      font-weight:700;
-      font-size:22px;
-    }
-
-    .nav a {
-      margin-left:20px;
-      text-decoration:none;
-      color:#333;
-    }
-
-    /* HERO */
-    .hero {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      align-items:center;
-      gap:40px;
-      padding:100px 20px;
-    }
-
-    .hero h1 {
-      font-size:52px;
-      margin-bottom:20px;
-    }
-
-    .hero p {
-      color:#555;
-      margin-bottom:15px;
-    }
-
-    /* BUTTON */
+    .container { max-width:1200px; margin:auto; padding:20px; }
+    .nav { display:flex; justify-content:space-between; align-items:center; padding:20px 0; }
+    .logo { font-weight:700; font-size:22px; }
+    .hero { display:grid; grid-template-columns:1fr 1fr; gap:40px; padding:100px 20px; }
+    .hero h1 { font-size:52px; margin-bottom:20px; }
+    .hero p { color:#555; margin-bottom:15px; }
     .button {
-      background:#16a34a;
-      color:white;
-      padding:16px 30px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:600;
-      display:inline-block;
-      box-shadow:0 8px 25px rgba(0,0,0,0.15);
-      transition:all 0.2s ease;
+      background:#16a34a; color:white; padding:16px 30px;
+      border-radius:10px; text-decoration:none; font-weight:600;
+      display:inline-block; box-shadow:0 8px 25px rgba(0,0,0,0.15);
+      transition:0.2s;
     }
-
-    .button:hover {
-      transform:translateY(-2px) scale(1.03);
-      background:#15803d;
-    }
-
-
-    /* TRUST */
-    .trust {
-      margin-top:20px;
-      color:#555;
-    }
-
-
-    /* PHONE MOCKUP */
+    .button:hover { transform:translateY(-2px) scale(1.03); }
+    .trust { margin-top:20px; color:#555; }
     .phone {
-      background:#111;
-      color:white;
-      border-radius:30px;
-      padding:25px;
-      height:480px;
-      font-size:14px;
-      line-height:1.6;
+      background:#111; color:white; border-radius:30px;
+      padding:25px; height:460px; font-size:14px; line-height:1.6;
     }
 
-    /* FEATURES */
-    .features {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:30px;
-      margin:80px 0;
-    }
-
-    .card {
-      padding:30px;
-      border-radius:12px;
-      border:1px solid #eee;
-      transition:0.3s;
-    }
-
-    .card:hover { transform:translateY(-5px); }
-
-
-    /* SIGNUP */
-    .signup {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:40px;
-      padding:80px 20px;
-      background:#f8fdf9;
-    }
-
-    .form-box {
-      background:white;
-      padding:40px;
-      border-radius:16px;
-    }
-
-    input, select {
-      width:100%;
-      padding:12px;
-      margin-bottom:10px;
-      border-radius:8px;
-      border:1px solid #ddd;
-    }
-
-    /* FOOTER */
-    .footer {
-      text-align:center;
-      padding:40px;
-      color:#777;
-    }
-
-    /* MOBILE */
+    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; margin:80px 0; }
+    .card { padding:30px; border-radius:12px; border:1px solid #eee; }
+    /* MULTI STEP */
+    .signup { padding:80px 20px; background:#f8fdf9; }
+    .form-box { max-width:500px; margin:auto; background:white; padding:40px; border-radius:16px; }
+    .step { display:none; }
+    .step.active { display:block; }
+    input, select { width:100%; padding:12px; margin-bottom:12px; border-radius:8px; border:1px solid #ddd; }
+    .footer { text-align:center; padding:40px; color:#777; }
     @media (max-width:900px) {
       .hero { grid-template-columns:1fr; }
-      .signup { grid-template-columns:1fr; }
-      .hero h1 { font-size:36px; }
+      .hero h1 { font-size:34px; }
     }
-
   </style>
 </head>
-
 <body>
 
-<!-- NAV -->
 <div class="container nav">
   <div class="logo">FitFlow AI</div>
-  <div>
-    <a href="#features">Features</a>
-    <a href="#signup">Start</a>
-  </div>
 </div>
 
 <!-- HERO -->
 <div class="container hero">
   <div>
     <h1>De slimste manier om fitter te worden 💪</h1>
-    <p>Persoonlijke workouts en coaching via WhatsApp — elke dag opnieuw</p>
-    <p><strong>Geen discipline nodig. Geen gedoe. Gewoon resultaat.</strong></p>
-
-
+    <p>Persoonlijke workouts via WhatsApp</p>
+    <p><strong>Geen gedoe. Gewoon resultaat.</strong></p>
     <a href="#signup" class="button">Start gratis</a>
 
-
     <div class="trust">
-      ✅ 3 dagen gratis trial<br>
-      ✅ Geen abonnement verplicht<br>
-      ✅ Start binnen 1 minuut
+      ✅ 3 dagen gratis • ✅ Geen verplichting • ✅ Start direct
     </div>
   </div>
 
-
   <div class="phone">
-    <div style="text-align:center; margin-bottom:10px;">WhatsApp</div>
-    🔥 Goedemorgen Marco ✅<br><br>
-    🏋️ Upper Body Workout<br><br>
-    • Push-ups — 4x12<br>
-    • Pull-ups — 3x8<br>
-    • Shoulder press — 3x10<br><br>
-    💡 Tip: Focus op techniek<br><br>
-    🔥 Motivatie: Consistentie wint<br><br>
-    ✅ Stuur DONE
+    WhatsApp<br><br>
+    🔥 Goedemorgen Marco<br>
+    🏋️ Upper Body<br><br>
+    • Push-ups 4x12<br>
+    • Pull-ups 3x8<br>
+    • Shoulder press 3x10<br><br>
+    ✅ DONE
   </div>
 </div>
 
 <!-- FEATURES -->
-<div class="container features" id="features">
-  <div class="card">
-    <h3>AI Personal Coach</h3>
-    <p>Dagelijks aangepast op jouw doel</p>
-  </div>
-
-
-  <div class="card">
-    <h3>Smart Workouts</h3>
-    <p>Nooit meer nadenken wat je moet doen</p>
-  </div>
-
-
-  <div class="card">
-    <h3>Motivatie</h3>
-    <p>Blijf consistent zonder discipline problemen</p>
-  </div>
+<div class="container features">
+  <div class="card"><h3>AI Coach</h3><p>Dagelijks schema</p></div>
+  <div class="card"><h3>Smart Workouts</h3><p>Automatisch plan</p></div>
+  <div class="card"><h3>Motivatie</h3><p>Blijf consistent</p></div>
 </div>
 
-<!-- SIGNUP -->
-<div id="signup" class="container signup">
-  <div>
-    <h2>Start vandaag</h2>
-    <p>Gratis trial • Geen verplichting</p>
-  </div>
-
+<!-- MULTI STEP ONBOARDING -->
+<div id="signup" class="signup">
   <div class="form-box">
-    <input placeholder="Naam">
-    <input placeholder="WhatsApp nummer">
+
+    <!-- STEP 1 -->
+    <div class="step active" id="step1">
+      <h2>Wat is je doel?</h2>
+      <select id="goal">
+        <option>Afvallen</option>
+        <option>Spieropbouw</option>
+      </select>
+      <button class="button" onclick="nextStep(1)">Volgende</button>
+    </div>
+    <!-- STEP 2 -->
+    <div class="step" id="step2">
+      <h2>Wat is je niveau?</h2>
+      <select id="level">
+        <option>Beginner</option>
+        <option>Advanced</option>
+      </select>
+      <button class="button" onclick="nextStep(2)">Volgende</button>
+    </div>
+    <!-- STEP 3 -->
+    <div class="step" id="step3">
+      <h2>Hoe vaak per week?</h2>
+      <select id="days">
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+      <button class="button" onclick="nextStep(3)">Volgende</button>
+    </div>
+    <!-- STEP 4 -->
+    <div class="step" id="step4">
+      <h2>Laatste stap 🚀</h2>
+      <input placeholder="Naam">
+      <input placeholder="WhatsApp nummer">
+
+      <button class="button">Start gratis</button>
+    </div>
 
 
-    <select>
-      <option>Doel</option>
-      <option>Afvallen</option>
-      <option>Spieropbouw</option>
-    </select>
-
-    <select>
-      <option>Niveau</option>
-      <option>Beginner</option>
-      <option>Advanced</option>
-    </select>
-
-    <select>
-      <option>Dagen per week</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-
-    <a href="#" class="button" style="width:100%; text-align:center">Start gratis</a>
   </div>
 </div>
 
-<!-- FOOTER -->
+<script>
+function nextStep(current) {
+  document.getElementById("step" + current).classList.remove("active");
+  document.getElementById("step" + (current+1)).classList.add("active");
+}
+</script>
+
+
 <div class="footer">
 © 2026 FitFlow AI
 </div>
