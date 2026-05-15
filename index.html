@@ -1,3 +1,5 @@
+
+
 <!-- FitFlow AI - FINAL PROFESSIONAL VERSION WITH MULTI-STEP ONBOARDING -->
 <!DOCTYPE html>
 <html lang="nl">
@@ -59,7 +61,6 @@
     <p>Persoonlijke workouts via WhatsApp</p>
     <p><strong>Geen gedoe. Gewoon resultaat.</strong></p>
     <a href="#signup" class="button">Start gratis</a>
-
     <div class="trust">
       ✅ 3 dagen gratis • ✅ Geen verplichting • ✅ Start direct
     </div>
@@ -130,8 +131,23 @@
 
 <script>
 function nextStep(current) {
+  // check if input/select has value before proceeding
+  let currentStep = document.getElementById("step" + current);
+  let input = currentStep.querySelector("select, input");
+
+
+  if (!input || (input.value && input.value.trim() !== "")) {
+    currentStep.classList.remove("active");
+    document.getElementById("step" + (current + 1)).classList.add("active");
+  } else {
+    alert("Beantwoord eerst de vraag ✅");
+  }
+}
+
+
+function prevStep(current) {
   document.getElementById("step" + current).classList.remove("active");
-  document.getElementById("step" + (current+1)).classList.add("active");
+  document.getElementById("step" + (current - 1)).classList.add("active");
 }
 </script>
 
