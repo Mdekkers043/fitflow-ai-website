@@ -1,3 +1,5 @@
+
+
 // FitFlow AI - Full MVP (React + Backend concept)
 
 
@@ -5,12 +7,10 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
 export default function FitFlowWebsite() {
   const [form, setForm] = useState({ goal: "", level: "", days: "", type: "" });
 
-
-  return (
+  return (
     <div className="min-h-screen bg-green-50 p-6 text-center">
       <h1 className="text-4xl font-bold mb-4">FitFlow AI 💪</h1>
       <p className="mb-6">Jouw persoonlijke AI coach via WhatsApp</p>
@@ -42,28 +42,22 @@ export default function FitFlowWebsite() {
           <Button onClick={()=>alert("Connected to WhatsApp soon!")}>Start via WhatsApp 🚀</Button>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>
+  );
 }
-
 // ================= BACKEND (Node.js Express) =================
-
 /*
 Install:
 - npm init
 - npm install express cors body-parser twilio openai node-cron
 */
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
 const { OpenAI } = require("openai");
-
 const app = express();
 app.use(bodyParser.json());
-
 const users = []; // eenvoudige DB
-
 // SIGNUP
 app.post("/signup", (req, res) => {
   const user = req.body;
@@ -71,26 +65,20 @@ app.post("/signup", (req, res) => {
   users.push(user);
   res.send({ success: true });
 });
-
 // AI WORKOUT GENERATOR
 const openai = new OpenAI({ apiKey: "YOUR_API_KEY" });
-
 async function generateWorkout(user) {
   const prompt = `Maak een trainingsschema:
 Doel: ${user.goal}
 Niveau: ${user.level}`;
-
   const response = await openai.chat.completions.create({
     model: "gpt-4o-mini",
     messages: [{ role: "user", content: prompt }]
   });
-
   return response.choices[0].message.content;
 }
-
 // WHATSAPP SEND (Twilio)
 const client = require("twilio")("SID","TOKEN");
-
 async function sendWhatsApp(to, message) {
   await client.messages.create({
     body: message,
@@ -98,7 +86,6 @@ async function sendWhatsApp(to, message) {
     to: `whatsapp:${to}`
   });
 }
-
 // DAILY CRON JOB
 cron.schedule("0 8 * * *", async () => {
   for (const user of users) {
@@ -106,26 +93,19 @@ cron.schedule("0 8 * * *", async () => {
     await sendWhatsApp(user.phone, workout);
   }
 });
-
 // INBOUND MESSAGE (DONE handling)
 app.post("/whatsapp", async (req, res) => {
   const msg = req.body.Body;
   const phone = req.body.From;
-
   const user = users.find(u => u.phone === phone);
-
   if (msg === "DONE") {
     user.streak++;
     await sendWhatsApp(phone, `🔥 Nice work! Je zit op ${user.streak} dagen streak 💪`);
   }
-
   res.send("ok");
 });
-
 app.listen(3000, ()=>console.log("Server running"));
-
 // ================= DATABASE (voorbeeld structuur) =================
-
 /*
 users:
 - id
@@ -135,9 +115,7 @@ users:
 - days
 - streak
 */
-
 // ================= BUSINESS LOGIC =================
-
 /*
 Flow:
 1. User vult website in
@@ -149,9 +127,7 @@ Flow:
 5. User antwoord DONE
    -> streak + motivatie
 */
-
 // ================= NEXT LEVEL FEATURES =================
-
 /*
 - Voice messages via ElevenLabs
 - Nutrition plan via AI
