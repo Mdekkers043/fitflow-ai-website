@@ -1,207 +1,192 @@
-
-
-<!-- FitFlow AI - Landing + Separate Onboarding Page -->
+<!-- FitFlow AI - Desktop Landing Page Concept -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=1200">
 <title>FitFlow AI</title>
-https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#f8fdf9;color:#111}
-.container{max-width:1100px;margin:auto;padding:20px}
+* {margin:0;padding:0;box-sizing:border-box;}
+body {font-family:'Inter',sans-serif;background:#f4f9f5;color:#111;}
+.container {max-width:1200px;margin:auto;padding:40px;}
+
 
 /* HERO */
-.hero{text-align:center;padding:100px 20px}
-.hero h1{font-size:50px;margin-bottom:20px}
-.hero p{color:#555;margin-bottom:10px}
-.highlight{margin-top:20px;font-size:18px}
+.hero {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+  padding-top:80px;
+}
+.hero h1 {
+  font-size:54px;
+  margin-bottom:20px;
+}
+.hero p {
+  font-size:18px;
+  color:#555;
+  margin-bottom:15px;
+}
 
 
-.button{
+.button {
   background:linear-gradient(135deg,#16a34a,#22c55e);
-  color:white;padding:18px 32px;border-radius:12px;
-  text-decoration:none;font-weight:600;
-  display:inline-block;margin-top:30px;
+  color:white;
+  padding:18px 34px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:600;
+  display:inline-block;
+  margin-top:25px;
   box-shadow:0 10px 25px rgba(22,163,74,0.3);
-  transition:0.25s;cursor:pointer;border:none
-}
-.button:hover{transform:translateY(-3px) scale(1.04)}
-.features{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;margin:60px 0;
-}
-
-.card{background:white;padding:25px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,0.05);text-align:center}
-/* CHAT */
-.chat{max-width:900px;margin:60px auto}
-.chat-box{background:#111;color:#fff;padding:20px;border-radius:12px;font-size:14px;line-height:1.6}
-/* CTA BOTTOM */
-.cta-bottom{text-align:center;padding:80px 20px}
-/* ONBOARDING PAGE */
-
-.onboarding-page {
-  animation: fadeIn 0.25s ease;
-}
-<div style="position:absolute;top:20px;right:20px;cursor:pointer;font-size:20px;" onclick="closeOnboarding()">✕</div>
-function closeOnboarding(){
-  document.getElementById('onboarding').style.display='none';
 }
 
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* MOCKUP */
+.mockup {
+  background:#111;
+  color:white;
+  padding:30px;
+  border-radius:20px;
+  font-size:14px;
+  line-height:1.7;
 }
 
-.form-card{
-  width:100%;max-width:500px;background:white;padding:40px;
-  border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,0.1);
-  text-align:center
+/* SECTION */
+.section {
+  margin-top:120px;
+}
+.section h2 {
+  text-align:center;
+  font-size:36px;
+  margin-bottom:40px;
 }
 
-input,select{
-  width:100%;padding:14px;margin-bottom:12px;
-  border-radius:10px;border:1px solid #ddd;
+/* GRID */
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
 }
 
-.footer{text-align:center;padding:40px;color:#777}
+.card {
+  background:white;
+  padding:30px;
+  border-radius:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.05);
+}
+
+.card h3 {margin-bottom:10px;}
+.card p {color:#666;font-size:15px;}
+
+
+/* FOOTER CTA */
+.cta {
+  text-align:center;
+  margin-top:120px;
+  padding:60px;
+  background:#eaffea;
+  border-radius:20px;
+}
+
+.footer {text-align:center;padding:40px;color:#777;}
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
+
 <!-- HERO -->
-<div class="hero container">
-  <h1>FitFlow AI 💪</h1>
-  <p><strong>Jouw persoonlijke AI coach via WhatsApp</strong></p>
-
-
-  <div class="highlight">
-    👉 Elke dag krijg jij automatisch:<br><br>
-    ✅ Trainingsschema<br>
-    ✅ Motivatie<br>
-    ✅ Coaching tips<br>
-    ✅ Reminders
-  </div>
+<div class="hero">
+<div>
+<h1>Jouw persoonlijke AI coach 💪</h1>
+<p>FitFlow AI stuurt jou elke dag precies wat je moet doen via WhatsApp.</p>
+<p><strong>Geen apps. Geen planning. Geen gedoe.</strong></p>
+<p>Jij hoeft alleen te trainen.</p>
+<a href="#" class="button">Start binnen 30 seconden 🚀</a>
 </div>
 
-<!-- FEATURES -->
-<div class="container features">
-  <div class="card">📋 Dagelijks schema</div>
-  <div class="card">🔥 Motivatie</div>
-  <div class="card">🎯 Coaching</div>
-  <div class="card">⏰ Reminders</div>
-</div>
-
-<!-- CHAT PREVIEW -->
-<div class="chat">
-  <div class="form-card">
-    <h2>Hoe werkt de AI coach?</h2>
-    <div class="chat-box">
-🔥 Goedemorgen Alex!<br><br>
+<div class="mockup">
+<strong>WhatsApp</strong><br><br>
+🔥 Goedemorgen Alex<br><br>
 🏋️ Vandaag: Upper Body<br><br>
 1. Push-ups – 4x12<br>
 2. Pull-ups – 3x8<br>
 3. Shoulder press – 3x10<br><br>
-💡 Tip: Focus op volledige beweging<br><br>
-🔥 Motivatie: Blijven gaan > perfect zijn<br><br>
-✅ Stuur "DONE"
-    </div>
-  </div>
-</div>
-<!-- CTA BOTTOM -->
-<div class="cta-bottom">
-  <h2>Klaar om te starten?</h2>
-  <p>Ontvang jouw persoonlijke plan binnen 30 seconden</p>
-
-
-  <button class="button" onclick="openOnboarding()">
-    Start jouw plan 🚀
-  </button>
+💡 Tip: Focus op techniek<br><br>
+🔥 Motivatie: Consistentie wint altijd<br><br>
+✅ Stuur DONE
 </div>
 
-
-<!-- ONBOARDING PAGE -->
-<div id="onboarding" class="onboarding-page">
-  
-  <!-- STEP 1 -->
-  <div id="step1" class="form-card">
-    <h2>Jouw persoonlijke plan</h2>
-    <p>Stap 1 van 2</p>
+</div>
+<!-- WHAT IS IT -->
+<div class="section">
+<h2>Wat is FitFlow AI?</h2>
+<div class="grid">
 
 
-    <select id="goal">
-      <option value="">Kies doel</option>
-      <option>Afvallen</option>
-      <option>Spieropbouw</option>
-    </select>
-
-    <select id="level">
-      <option value="">Kies niveau</option>
-      <option>Beginner</option>
-      <option>Advanced</option>
-    </select>
-
-    <select id="days">
-      <option value="">Dagen per week</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-
-    <button class="button" onclick="nextStep()">Volgende →</button>
-  </div>
-
-  <!-- STEP 2 -->
-  <div id="step2" class="form-card" style="display:none">
-    <h2>Bijna klaar 🚀</h2>
-
-    <input id="name" placeholder="Naam">
-    <input id="phone" placeholder="WhatsApp nummer">
-
-    <button class="button" onclick="finish()">Start gratis</button>
-  </div>
-
+<div class="card">
+<h3>Dagelijkse workouts</h3>
+<p>Elke dag een nieuw trainingsschema dat automatisch wordt gestuurd.</p>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">© 2026 FitFlow AI</div>
-<script>
-function openOnboarding(){
-  document.getElementById('onboarding').style.display='flex';
-}
+<div class="card">
+<h3>AI coaching</h3>
+<p>De AI past zich aan jouw niveau en prestaties aan.</p>
+</div>
+<div class="card">
+<h3>WhatsApp gemak</h3>
+<p>Alles gebeurt via WhatsApp. Geen app nodig.</p>
+</div>
+</div>
+</div>
+<!-- HOW IT WORKS -->
+<div class="section">
+<h2>Hoe werkt het?</h2>
+<div class="grid">
+<div class="card">
+<h3>1. Jij geeft je doel</h3>
+<p>Afvallen, spieropbouw of fitter worden.</p>
+</div>
+<div class="card">
+<h3>2. AI maakt plan</h3>
+<p>Je krijgt elke dag automatisch je workout.</p>
+</div>
+<div class="card">
+<h3>3. Jij voert uit</h3>
+<p>Stuur DONE en blijf je progress bijhouden.</p>
+</div>
+</div>
+</div>
+<!-- BENEFITS -->
+<div class="section">
+<h2>Waarom dit werkt</h2>
+<div class="grid">
+<div class="card">
+<p>✅ Geen keuzestress</p>
+</div>
+<div class="card">
+<p>✅ Altijd motivatie</p>
+</div>
 
-
-function nextStep(){
-  let goal = document.getElementById('goal').value;
-  let level = document.getElementById('level').value;
-  let days = document.getElementById('days').value;
-
-  if(goal && level && days){
-    document.getElementById('step1').style.display='none';
-    document.getElementById('step2').style.display='block';
-  } else {
-    alert('Vul alle vragen in ✅');
-  }
-}
-
-function finish(){
-  let name = document.getElementById('name').value;
-  let phone = document.getElementById('phone').value;
-
-  if(name && phone){
-    document.getElementById('step2').innerHTML = `
-      <h2>✅ Je plan komt eraan</h2>
-      <p>Check je WhatsApp binnen enkele minuten</p>
-    `;
-  } else {
-    alert('Vul je gegevens in');
-  }
-}
-</script>
-
+<div class="card">
+<p>✅ Consistent resultaat</p>
+</div>
+</div>
+</div>
+<!-- CTA -->
+<div class="cta">
+<h2>Stop met nadenken. Begin met trainen.</h2>
+<p>Start vandaag en ontvang direct jouw eerste workout.</p>
+<a href="#" class="button">Start gratis</a>
+</div>
+</div>
+<div class="footer">
+© 2026 FitFlow AI
+</div>
 </body>
