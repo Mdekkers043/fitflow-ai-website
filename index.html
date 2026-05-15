@@ -1,54 +1,160 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8">
-  <title>FitFlow AI</title>
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      background: #f3fff5;
-      padding: 20px;
-    }
-    h1 { font-size: 48px; }
-    .button {
-      background: green;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 10px;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 20px;
-    }
-    .box {
-      background: white;
-      padding: 20px;
-      margin: 10px;
-      border-radius: 10px;
-      display: inline-block;
-      width: 250px;
-    }
-  </style>
-</head>
+// FitFlow AI - Full MVP (React + Backend concept)
 
-<body>
 
-<h1>FitFlow AI 💪</h1>
-<p>Jouw persoonlijke AI coach via WhatsApp</p>
+// ================= FRONTEND (Landing + Onboarding) =================
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
-<a href="#" class="button">Start vandaag 🚀</a>
+export default function FitFlowWebsite() {
+  const [form, setForm] = useState({ goal: "", level: "", days: "", type: "" });
 
-<h2>Wat krijg je?</h2>
 
-<div class="box">📋 Dagelijks schema</div>
-<div class="box">🔥 Motivatie</div>
-<div class="box">🎯 Coaching tips</div>
-<div class="box">⏰ Reminders</div>
+  return (
+    <div className="min-h-screen bg-green-50 p-6 text-center">
+      <h1 className="text-4xl font-bold mb-4">FitFlow AI 💪</h1>
+      <p className="mb-6">Jouw persoonlijke AI coach via WhatsApp</p>
+      {/* Onboarding */}
+      <Card className="max-w-lg mx-auto">
+        <CardContent className="p-6">
+          <h2 className="text-xl font-bold mb-4">Start jouw traject</h2>
+          <select onChange={(e)=>setForm({...form, goal:e.target.value})} className="mb-2 w-full p-2">
+            <option>Doel kiezen</option>
+            <option value="afvallen">Afvallen</option>
+            <option value="spieropbouw">Spieropbouw</option>
+          </select>
+          <select onChange={(e)=>setForm({...form, level:e.target.value})} className="mb-2 w-full p-2">
+            <option>Niveau</option>
+            <option value="beginner">Beginner</option>
+            <option value="advanced">Advanced</option>
+          </select>
+          <select onChange={(e)=>setForm({...form, days:e.target.value})} className="mb-2 w-full p-2">
+            <option>Dagen per week</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <select onChange={(e)=>setForm({...form, type:e.target.value})} className="mb-4 w-full p-2">
+            <option>Locatie</option>
+            <option value="home">Thuis</option>
+            <option value="gym">Gym</option>
+          </select>
+          <Button onClick={()=>alert("Connected to WhatsApp soon!")}>Start via WhatsApp 🚀</Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
 
-<h2>Hoe werkt het?</h2>
-<p>1. Meld je aan</p>
-<p>2. Stel je doelen</p>
-<p>3. Krijg coaching via WhatsApp</p>
+// ================= BACKEND (Node.js Express) =================
 
-</body>
-</html>
+/*
+Install:
+- npm init
+- npm install express cors body-parser twilio openai node-cron
+*/
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const cron = require("node-cron");
+const { OpenAI } = require("openai");
+
+const app = express();
+app.use(bodyParser.json());
+
+const users = []; // eenvoudige DB
+
+// SIGNUP
+app.post("/signup", (req, res) => {
+  const user = req.body;
+  user.streak = 0;
+  users.push(user);
+  res.send({ success: true });
+});
+
+// AI WORKOUT GENERATOR
+const openai = new OpenAI({ apiKey: "YOUR_API_KEY" });
+
+async function generateWorkout(user) {
+  const prompt = `Maak een trainingsschema:
+Doel: ${user.goal}
+Niveau: ${user.level}`;
+
+  const response = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [{ role: "user", content: prompt }]
+  });
+
+  return response.choices[0].message.content;
+}
+
+// WHATSAPP SEND (Twilio)
+const client = require("twilio")("SID","TOKEN");
+
+async function sendWhatsApp(to, message) {
+  await client.messages.create({
+    body: message,
+    from: "whatsapp:+14155238886",
+    to: `whatsapp:${to}`
+  });
+}
+
+// DAILY CRON JOB
+cron.schedule("0 8 * * *", async () => {
+  for (const user of users) {
+    const workout = await generateWorkout(user);
+    await sendWhatsApp(user.phone, workout);
+  }
+});
+
+// INBOUND MESSAGE (DONE handling)
+app.post("/whatsapp", async (req, res) => {
+  const msg = req.body.Body;
+  const phone = req.body.From;
+
+  const user = users.find(u => u.phone === phone);
+
+  if (msg === "DONE") {
+    user.streak++;
+    await sendWhatsApp(phone, `🔥 Nice work! Je zit op ${user.streak} dagen streak 💪`);
+  }
+
+  res.send("ok");
+});
+
+app.listen(3000, ()=>console.log("Server running"));
+
+// ================= DATABASE (voorbeeld structuur) =================
+
+/*
+users:
+- id
+- phone
+- goal
+- level
+- days
+- streak
+*/
+
+// ================= BUSINESS LOGIC =================
+
+/*
+Flow:
+1. User vult website in
+2. Data -> backend
+3. WhatsApp connect
+4. Elke dag:
+   - AI workout
+   - WhatsApp gestuurd
+5. User antwoord DONE
+   -> streak + motivatie
+*/
+
+// ================= NEXT LEVEL FEATURES =================
+
+/*
+- Voice messages via ElevenLabs
+- Nutrition plan via AI
+- Coach styles (hard / soft)
+- Payments via Stripe
+*/
