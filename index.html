@@ -10,14 +10,14 @@
 <style>
   
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+  display: flex;
+  justify-content: space-between; /* 🔥 links + rechts */
+  align-items: center;
+  padding: 20px 40px;
 }
-  body {
-  padding-top: 80px; /* voorkomt overlap */
+
+.logo {
+  height: 40px; /* pas aan naar smaak */
 }
 
 .logo {
@@ -220,13 +220,15 @@ input:focus {
 
 <div class="container">
 
-<div class="header">
-  <img src="fitflow.png" class="logo">
 
-  <a href="aanmelden.html" class="button">
+<div class="header">
+  fitflow.png
+
+  aanmelden.html
     Aanmelden ✅
   </a>
 </div>
+
 
 <!-- HERO -->
 <div class="hero">
