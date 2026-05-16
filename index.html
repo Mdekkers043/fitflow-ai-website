@@ -10,10 +10,14 @@
 <style>
   
 .header {
-  display: flex;
-  justify-content: space-between; /* 🔥 links + rechts */
-  align-items: center;
-  padding: 20px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+  body {
+  padding-top: 80px; /* voorkomt overlap */
 }
 
 .logo {
