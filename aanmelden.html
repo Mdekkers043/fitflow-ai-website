@@ -83,11 +83,22 @@
 </button>
 
 <!-- SUCCESS -->
-<div id="successMessage" style="display:none;text-align:center;color:#fff;margin-top:20px;">
-  <h3>✅ Gelukt!</h3>
-  <p>Je bent aangemeld.</p>
-  <p>Je ontvangt binnenkort je eerste workout 💪</p>
+
+<div id="successMessage" style="
+  display:none;
+  text-align:center;
+  color:#fff;
+  margin-top:40px;
+  padding:30px;
+  background:rgba(0,0,0,0.5);
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+">
+  <h2 style="color:#22c55e;margin-bottom:10px;">✅ Registratie gelukt!</h2>
+  <p>Welkom bij FitFlow 💪</p>
+  <p>Je ontvangt binnenkort je eerste workout.</p>
 </div>
+
 
 </form>
 </div>
@@ -189,9 +200,15 @@ prevBtn.onclick = () => {
   }
 };
 
-form.onsubmit = (e) => {
-  e.preventDefault();
+form.addEventListener("submit", function(e){form.addEventListener("submit", function(e form verbergen
   form.style.display = "none";
+
+  // 🎯 success tonen
   successMessage.style.display = "block";
-};
+
+  // 🎯 scroll automatisch naar melding
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+  e.preventDefault();
+
 </script>
