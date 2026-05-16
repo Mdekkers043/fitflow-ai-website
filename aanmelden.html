@@ -85,3 +85,37 @@
 </div>
 
 </form>
+<script>
+const steps = document.querySelectorAll(".step");
+const nextBtn = document.getElementById("nextBtn");
+const finalFields = document.getElementById("finalFields");
+const form = document.getElementById("onboardingForm");
+const successMessage = document.getElementById("successMessage");
+
+let currentStep = 0;
+
+nextBtn.addEventListener("click", () => {
+  const inputs = steps[currentStep].querySelectorAll("input, select");
+
+  for (let input of inputs) {
+    if (!input.value) return;
+  }
+
+  steps[currentStep].style.display = "none";
+  currentStep++;
+
+  if (currentStep < steps.length) {
+    steps[currentStep].style.display = "block";
+  } else {
+    nextBtn.style.display = "none";
+    finalFields.style.display = "block";
+  }
+});
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  form.style.display = "none";
+  successMessage.style.display = "block";
+});
+</script>
