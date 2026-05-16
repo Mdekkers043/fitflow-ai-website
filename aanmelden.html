@@ -161,17 +161,15 @@ const totalSteps = steps.length;
 function updateUI() {
 
   steps.forEach((s,i)=>{
-    s.style.display = i === currentStep ? "block" : "none";
-  });
-
-  // progress
+    progress    s.style.display = i === currentStep ? "block" : "none";
   stepNr.innerText = currentStep + 1;
   progressBar.style.width = ((currentStep+1)/totalSteps)*100 + "%";
 
-  // knop states
+  // vorige knop
   prevBtn.style.display = currentStep === 0 ? "none" : "block";
 
-  if(currentStep === totalSteps){
+  // 🔥 FIX HIER
+  if(currentStep === totalSteps - 1){
     nextBtn.style.display = "none";
     finalFields.style.display = "block";
   } else {
@@ -179,6 +177,8 @@ function updateUI() {
     finalFields.style.display = "none";
   }
 }
+  });
+
 
 updateUI();
 
