@@ -1,17 +1,24 @@
+* {margin:0;padding:0;box-sizing:border-box;}
 body {
   font-family:'Inter',sans-serif;
   color:#000;
-  margin:0;
 
-  background: url('background.png') center / cover no-repeat fixed;
+  background-image: url('background.png');
+  background-size: cover;        /* vult scherm zonder vervormen */
+  background-position: center;   /* netjes gecentreerd */
+  background-repeat: no-repeat;  /* geen herhaling */
+  background-attachment: fixed;  /* 🔥 dit zorgt dat image stil blijft */
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: -1;
 }
 
-body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,0.6);
-  z-index:-1;
+html {
+  scroll-behavior: smooth;
 }
 
 <form id="onboardingForm" style="max-width:400px;margin:30px auto 0;">
