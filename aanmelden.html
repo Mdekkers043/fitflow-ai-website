@@ -1,12 +1,17 @@
 <form id="onboardingForm" style="max-width:400px;margin:30px auto 0;">
 
-<p style="font-weight:600;margin-bottom:10px; color:#aaa;">
-  Binnen 30 seconden gestart ✅
+<p id="progressText" style="font-weight:600;margin-bottom:10px;color:#fff;">
+  Stap 1 van 5
 </p>
 
-<!-- ✅ STEP 0 (ACCOUNT) -->
-<div class="step">
-  <p style="margin-bottom:6px;"><strong>Account</strong></p>
+<!-- PROGRESS BAR -->
+<div style="background:rgba(255,255,255,0.1);border-radius:10px;margin-bottom:20px;">
+  <div id="progressBar" style="height:6px;width:20%;background:#22c55e;border-radius:10px;transition:0.3s;"></div>
+</div>
+
+<!-- ✅ STEP 0 -->
+<div class="step active">
+  <p><strong>Account</strong></p>
 
   <input type="email" placeholder="Email" required class="input-dark">
   <input type="password" placeholder="Wachtwoord" required class="input-dark">
@@ -15,9 +20,8 @@
 </div>
 
 <!-- ✅ STEP 1 -->
-<div class="step" style="display:none;">
+<div class="step">
   <p><strong>Doel</strong></p>
-
   <select required class="input-dark">
     <option value="">Kies...</option>
     <option>Afvallen</option>
@@ -26,9 +30,8 @@
 </div>
 
 <!-- ✅ STEP 2 -->
-<div class="step" style="display:none;">
+<div class="step">
   <p><strong>Niveau</strong></p>
-
   <select required class="input-dark">
     <option value="">Kies...</option>
     <option>Beginner</option>
@@ -37,16 +40,14 @@
 </div>
 
 <!-- ✅ STEP 3 -->
-<div class="step" style="display:none;">
+<div class="step">
   <p><strong>Dagen per week</strong></p>
-
   <input type="number" min="1" max="7" required class="input-dark">
 </div>
 
 <!-- ✅ STEP 4 -->
-<div class="step" style="display:none;">
+<div class="step">
   <p><strong>Locatie</strong></p>
-
   <select required class="input-dark">
     <option value="">Kies...</option>
     <option>Thuis</option>
@@ -55,7 +56,7 @@
 </div>
 
 <!-- ✅ FINAL -->
-<div id="finalFields" style="display:none; margin-top:10px;">
+<div id="finalFields" style="display:none;margin-top:15px;">
   <button type="submit" class="button" style="width:100%;">
     Aanmelden 🚀
   </button>
@@ -67,7 +68,7 @@
 </button>
 
 <!-- ✅ SUCCESS -->
-<div id="successMessage" style="display:none;text-align:center; color:white; margin-top:20px;">
+<div id="successMessage" style="display:none;text-align:center;color:#fff;margin-top:20px;">
   <h3>✅ Gelukt!</h3>
   <p>Je bent aangemeld.</p>
   <p>Je ontvangt binnenkort je eerste workout 💪</p>
@@ -76,34 +77,49 @@
 </form>
 
 <style>
-/* ✅ DARK INPUT STYLE (BELANGRIJKSTE FIX) */
+/* ✅ BETERE INPUT STYLE (leesbaar!) */
 .input-dark {
   width:100%;
   padding:14px;
-  margin-bottom:10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.05);
+  margin-bottom:12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.5); /* 🔥 donkerder */
   color:#fff;
   font-size:15px;
 }
 
 .input-dark::placeholder {
-  color:#aaa;
+  color:#ccc; /* 🔥 beter zichtbaar */
 }
 
 .input-dark:focus {
   outline:none;
   border:1px solid #22c55e;
-  box-shadow:0 0 0 2px rgba(34,197,94,0.2);
+  box-shadow:0 0 0 2px rgba(34,197,94,0.3);
 }
 
+/* FIX select kleur */
 select.input-dark {
   color:#fff;
 }
 
 select.input-dark option {
   color:#000;
+}
+
+/* ✅ ANIMATIE */
+.step {
+  display:none;
+  opacity:0;
+  transform:translateX(20px);
+  transition: all 0.3s ease;
+}
+
+.step.active {
+  display:block;
+  opacity:1;
+  transform:translateX(0);
 }
 </style>
 
@@ -114,7 +130,25 @@ const finalFields = document.getElementById("finalFields");
 const form = document.getElementById("onboardingForm");
 const successMessage = document.getElementById("successMessage");
 
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
+
 let currentStep = 0;
+const totalSteps = steps.length;
+
+function updateUI() {
+  steps.forEach((step, i) => {
+    step.classList.remove("active");
+    if(i === currentStep) step.classList.add("active");
+  });
+
+  let percent = ((currentStep+1)/totalSteps)*100;
+  progressBar.style.width = percent + "%";
+
+  progressText.innerText = `Stap ${currentStep+1} van ${totalSteps}`;
+}
+
+updateUI();
 
 nextBtn.addEventListener("click", () => {
   const inputs = steps[currentStep].querySelectorAll("input, select");
@@ -123,11 +157,10 @@ nextBtn.addEventListener("click", () => {
     if (!input.value) return;
   }
 
-  steps[currentStep].style.display = "none";
   currentStep++;
 
-  if (currentStep < steps.length) {
-    steps[currentStep].style.display = "block";
+  if (currentStep < totalSteps) {
+    updateUI();
   } else {
     nextBtn.style.display = "none";
     finalFields.style.display = "block";
