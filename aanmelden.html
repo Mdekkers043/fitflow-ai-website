@@ -161,14 +161,17 @@ const totalSteps = steps.length;
 function updateUI() {
 
   steps.forEach((s,i)=>{
-    progress    s.style.display = i === currentStep ? "block" : "none";
+    s.style.display = i === currentStep ? "block" : "none";
+  });
+
+  // progress
   stepNr.innerText = currentStep + 1;
   progressBar.style.width = ((currentStep+1)/totalSteps)*100 + "%";
 
   // vorige knop
   prevBtn.style.display = currentStep === 0 ? "none" : "block";
 
-  // 🔥 FIX HIER
+  // laatste stap
   if(currentStep === totalSteps - 1){
     nextBtn.style.display = "none";
     finalFields.style.display = "block";
@@ -177,8 +180,6 @@ function updateUI() {
     finalFields.style.display = "none";
   }
 }
-  });
-
 
 updateUI();
 
@@ -200,15 +201,12 @@ prevBtn.onclick = () => {
   }
 };
 
-form.addEventListener("submit", function(e){form.addEventListener("submit", function(e form verbergen
-  form.style.display = "none";
-
-  // 🎯 success tonen
-  successMessage.style.display = "block";
-
-  // 🎯 scroll automatisch naar melding
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+form.addEventListener("submit", function(e){
   e.preventDefault();
 
+  form.style.display = "none";
+  successMessage.style.display = "block";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 </script>
