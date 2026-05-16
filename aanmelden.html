@@ -1,73 +1,80 @@
 <form id="onboardingForm" style="max-width:400px;margin:30px auto 0;">
 
-<p id="progressText" style="font-weight:600;margin-bottom:10px;color:#fff;">
-  Stap 1 van 5
+<p style="font-weight:600;margin-bottom:15px;color:#fff;">
+  Stap <span id="stepNr">1</span> van 5
 </p>
 
-<!-- PROGRESS BAR -->
-<div style="background:rgba(255,255,255,0.1);border-radius:10px;margin-bottom:20px;">
-  <div id="progressBar" style="height:6px;width:20%;background:#22c55e;border-radius:10px;transition:0.3s;"></div>
+<div style="height:6px;background:rgba(255,255,255,0.2);border-radius:10px;margin-bottom:25px;">
+  <div id="progressBar" style="height:6px;width:20%;background:#22c55e;border-radius:10px;transition:0.25s;"></div>
 </div>
 
-<!-- ✅ STEP 0 -->
-<div class="step active">
+<!-- STEP 0 -->
+<div class="step">
   <p><strong>Account</strong></p>
 
-  <input type="email" placeholder="Email" required class="input-dark">
-  <input type="password" placeholder="Wachtwoord" required class="input-dark">
-  <input type="text" placeholder="Naam" required class="input-dark">
-  <input type="tel" placeholder="WhatsApp (+316...)" required class="input-dark">
+  <input type="email" placeholder="Email" required class="input-ui">
+  <input type="password" placeholder="Wachtwoord" required class="input-ui">
+  <input type="text" placeholder="Naam" required class="input-ui">
+  <input type="tel" placeholder="WhatsApp (+316...)" required class="input-ui">
 </div>
 
-<!-- ✅ STEP 1 -->
-<div class="step">
+<!-- STEP 1 -->
+<div class="step" style="display:none;">
   <p><strong>Doel</strong></p>
-  <select required class="input-dark">
+
+  <select required class="input-ui">
     <option value="">Kies...</option>
     <option>Afvallen</option>
     <option>Spieropbouw</option>
   </select>
 </div>
 
-<!-- ✅ STEP 2 -->
-<div class="step">
+<!-- STEP 2 -->
+<div class="step" style="display:none;">
   <p><strong>Niveau</strong></p>
-  <select required class="input-dark">
+
+  <select required class="input-ui">
     <option value="">Kies...</option>
     <option>Beginner</option>
     <option>Advanced</option>
   </select>
 </div>
 
-<!-- ✅ STEP 3 -->
-<div class="step">
+<!-- STEP 3 -->
+<div class="step" style="display:none;">
   <p><strong>Dagen per week</strong></p>
-  <input type="number" min="1" max="7" required class="input-dark">
+
+  <input type="number" min="1" max="7" required class="input-ui">
 </div>
 
-<!-- ✅ STEP 4 -->
-<div class="step">
+<!-- STEP 4 -->
+<div class="step" style="display:none;">
   <p><strong>Locatie</strong></p>
-  <select required class="input-dark">
+
+  <select required class="input-ui">
     <option value="">Kies...</option>
     <option>Thuis</option>
     <option>Gym</option>
   </select>
 </div>
 
-<!-- ✅ FINAL -->
-<div id="finalFields" style="display:none;margin-top:15px;">
+<!-- FINAL -->
+<div id="finalFields" style="display:none;margin-top:10px;">
   <button type="submit" class="button" style="width:100%;">
     Aanmelden 🚀
   </button>
 </div>
 
-<!-- ✅ NEXT BUTTON -->
+<!-- NAV BUTTONS -->
+<button type="button" id="prevBtn" class="button" style="background:#444;width:100%;margin-top:10px;display:none;">
+  ← Vorige
+</button>
+
 <button type="button" id="nextBtn" class="button" style="width:100%;margin-top:10px;">
   Volgende →
 </button>
 
-<!-- ✅ SUCCESS -->
+<!-- SUCCESS -->
 <div id="successMessage" style="display:none;text-align:center;color:#fff;margin-top:20px;">
   <h3>✅ Gelukt!</h3>
   <p>Je bent aangemeld.</p>
@@ -77,100 +84,93 @@
 </form>
 
 <style>
-/* ✅ BETERE INPUT STYLE (leesbaar!) */
-.input-dark {
+/* ✅ INPUT PERFECT LEESBAAR */
+.input-ui {
   width:100%;
-  padding:14px;
+  padding:15px;
   margin-bottom:12px;
   border-radius:12px;
-  border:1px solid rgba(255,255,255,0.3);
-  background: rgba(0,0,0,0.5); /* 🔥 donkerder */
+  border:1px solid rgba(255,255,255,0.4);
+  background:rgba(0,0,0,0.55);
   color:#fff;
   font-size:15px;
 }
 
-.input-dark::placeholder {
-  color:#ccc; /* 🔥 beter zichtbaar */
+.input-ui::placeholder {
+  color:#ddd;
 }
 
-.input-dark:focus {
+.input-ui:focus {
   outline:none;
   border:1px solid #22c55e;
-  box-shadow:0 0 0 2px rgba(34,197,94,0.3);
+  box-shadow:0 0 0 2px rgba(34,197,94,0.25);
 }
 
-/* FIX select kleur */
-select.input-dark {
-  color:#fff;
-}
-
-select.input-dark option {
+select.input-ui option {
   color:#000;
-}
-
-/* ✅ ANIMATIE */
-.step {
-  display:none;
-  opacity:0;
-  transform:translateX(20px);
-  transition: all 0.3s ease;
-}
-
-.step.active {
-  display:block;
-  opacity:1;
-  transform:translateX(0);
 }
 </style>
 
 <script>
 const steps = document.querySelectorAll(".step");
 const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
 const finalFields = document.getElementById("finalFields");
-const form = document.getElementById("onboardingForm");
-const successMessage = document.getElementById("successMessage");
 
 const progressBar = document.getElementById("progressBar");
-const progressText = document.getElementById("progressText");
+const stepNr = document.getElementById("stepNr");
+
+const form = document.getElementById("onboardingForm");
+const successMessage = document.getElementById("successMessage");
 
 let currentStep = 0;
 const totalSteps = steps.length;
 
 function updateUI() {
-  steps.forEach((step, i) => {
-    step.classList.remove("active");
-    if(i === currentStep) step.classList.add("active");
+
+  steps.forEach((s,i)=>{
+    s.style.display = i === currentStep ? "block" : "none";
   });
 
-  let percent = ((currentStep+1)/totalSteps)*100;
-  progressBar.style.width = percent + "%";
+  // progress
+  stepNr.innerText = currentStep + 1;
+  progressBar.style.width = ((currentStep+1)/totalSteps)*100 + "%";
 
-  progressText.innerText = `Stap ${currentStep+1} van ${totalSteps}`;
+  // knop states
+  prevBtn.style.display = currentStep === 0 ? "none" : "block";
+
+  if(currentStep === totalSteps){
+    nextBtn.style.display = "none";
+    finalFields.style.display = "block";
+  } else {
+    nextBtn.style.display = "block";
+    finalFields.style.display = "none";
+  }
 }
 
 updateUI();
 
-nextBtn.addEventListener("click", () => {
+nextBtn.onclick = () => {
   const inputs = steps[currentStep].querySelectorAll("input, select");
 
-  for (let input of inputs) {
-    if (!input.value) return;
+  for (let i of inputs){
+    if(!i.value) return;
   }
 
   currentStep++;
+  updateUI();
+};
 
-  if (currentStep < totalSteps) {
+prevBtn.onclick = () => {
+  if(currentStep > 0){
+    currentStep--;
     updateUI();
-  } else {
-    nextBtn.style.display = "none";
-    finalFields.style.display = "block";
   }
-});
+};
 
-form.addEventListener("submit", function(e){
+form.onsubmit = (e) => {
   e.preventDefault();
-
   form.style.display = "none";
   successMessage.style.display = "block";
-});
+};
 </script>
