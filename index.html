@@ -350,6 +350,165 @@ input:focus {
 </div>
 
 </div>
+<section style="max-width:1100px;margin:120px auto;color:#fff;text-align:center;">
+
+<h2 style="font-size:40px;margin-bottom:10px;">Kies jouw plan</h2>
+<p style="color:#aaa;margin-bottom:60px;">Start gratis en upgrade wanneer je klaar bent</p>
+
+<div style="
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  align-items:stretch;
+">
+
+  <!-- ✅ PROEF -->
+  <div style="
+    background:rgba(0,0,0,0.6);
+    padding:40px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.1);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  ">
+    <div>
+      <p style="color:#22c55e;font-weight:700;">PROEF</p>
+      <h3 style="font-size:40px;margin:15px 0;">€0</h3>
+      <p style="color:#aaa;">3 dagen gratis</p>
+
+      <hr style="margin:25px 0;border-color:rgba(255,255,255,0.1);">
+
+      <p>✅ Test alle functies</p>
+      <p>✅ Direct starten</p>
+      <p>✅ Geen verplichtingen</p>
+    </div>
+
+    <button class="btn-outline">
+      Start proef
+    </button>
+  </div>
+
+  <!-- ✅ PRO -->
+  <div style="
+    background:rgba(0,0,0,0.75);
+    padding:40px;
+    border-radius:20px;
+    border:2px solid #22c55e;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  ">
+
+    <!-- badge -->
+    <div style="
+      position:absolute;
+      top:-12px;
+      left:50%;
+      transform:translateX(-50%);
+      background:#22c55e;
+      color:#000;
+      padding:6px 14px;
+      border-radius:10px;
+      font-size:12px;
+      font-weight:700;
+    ">
+      Meest gekozen
+    </div>
+
+    <div>
+      <p style="color:#22c55e;font-weight:700;">PRO</p>
+      <h3 style="font-size:40px;margin:15px 0;">€5</h3>
+      <p style="color:#aaa;">per maand</p>
+
+      <div style="text-align:center; margin-top:10px;">
+      <p style="margin:8px 0;">✅ Onbeperkte workouts</p>
+      <p style="margin:8px 0;">✅ AI coaching        </p>
+      <p style="margin:8px 0;">✅ WhatsApp integratie</p>
+      <p style="margin:8px 0;">✅ Support inbegrepen </p>
+    </div>
+</div>
+
+    <button class="btn-primary">
+      Start Pro voor €5/mnd
+    </button>
+  </div>
+
+  <!-- ✅ JAAR -->
+  <div style="
+    background:rgba(0,0,0,0.6);
+    padding:40px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.1);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  ">
+    <div>
+      <p style="color:#22c55e;font-weight:700;">JAAR</p>
+      <h3 style="font-size:40px;margin:15px 0;">€50</h3>
+      <p style="color:#aaa;">per jaar</p>
+
+      <hr style="margin:25px 0;border-color:rgba(255,255,255,0.1);">
+      
+<div style="text-align:center; margin-top:10px;">
+  <p style="margin:8px 0;">✅ Alles uit Pro</p>
+  <p style="margin:8px 0;">✅ Bespaar €10</p>
+  </div>
+
+    </div>
+
+    <button class="btn-outline">
+      Start Jaarlijks
+    </button>
+  </div>
+
+</div>
+
+</section>
+
+<style>
+/* ✅ OUTLINE BUTTON (zoals voorbeeld) */
+.btn-outline {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-outline:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+/* ✅ PRIMARY BUTTON (highlight) */
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: #22c55e;
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  background: #16a34a;
+}
+
+/* ✅ HOVER kaarten */
+section div > div:hover {
+  transform: translateY(-6px);
+  transition: 0.2s;
+}
+</style>
 
 <div class="footer">
   © 2026 FitFlow AI
