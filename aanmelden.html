@@ -1,6 +1,6 @@
 <form id="onboardingForm" style="max-width:400px;margin:30px auto 0;">
 
-<p style="font-weight:600;margin-bottom:10px;">
+<p style="font-weight:600;margin-bottom:10px; color:#aaa;">
   Binnen 30 seconden gestart ✅
 </p>
 
@@ -8,25 +8,17 @@
 <div class="step">
   <p style="margin-bottom:6px;"><strong>Account</strong></p>
 
-  <input type="email" placeholder="Email" required
-    style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
-
-  <input type="password" placeholder="Wachtwoord" required
-    style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
-
-  <input type="text" placeholder="Naam" required
-    style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
-
-  <input type="tel" placeholder="WhatsApp (+316...)" required
-    style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+  <input type="email" placeholder="Email" required class="input-dark">
+  <input type="password" placeholder="Wachtwoord" required class="input-dark">
+  <input type="text" placeholder="Naam" required class="input-dark">
+  <input type="tel" placeholder="WhatsApp (+316...)" required class="input-dark">
 </div>
 
 <!-- ✅ STEP 1 -->
 <div class="step" style="display:none;">
   <p><strong>Doel</strong></p>
 
-  <select required
-    style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+  <select required class="input-dark">
     <option value="">Kies...</option>
     <option>Afvallen</option>
     <option>Spieropbouw</option>
@@ -37,8 +29,7 @@
 <div class="step" style="display:none;">
   <p><strong>Niveau</strong></p>
 
-  <select required
-    style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+  <select required class="input-dark">
     <option value="">Kies...</option>
     <option>Beginner</option>
     <option>Advanced</option>
@@ -49,16 +40,14 @@
 <div class="step" style="display:none;">
   <p><strong>Dagen per week</strong></p>
 
-  <input type="number" min="1" max="7" required
-    style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+  <input type="number" min="1" max="7" required class="input-dark">
 </div>
 
 <!-- ✅ STEP 4 -->
 <div class="step" style="display:none;">
   <p><strong>Locatie</strong></p>
 
-  <select required
-    style="width:100%;padding:14px;margin-bottom:10px;border-radius:10px;border:1px solid #ddd;">
+  <select required class="input-dark">
     <option value="">Kies...</option>
     <option>Thuis</option>
     <option>Gym</option>
@@ -66,7 +55,7 @@
 </div>
 
 <!-- ✅ FINAL -->
-<div id="finalFields" style="display:none;">
+<div id="finalFields" style="display:none; margin-top:10px;">
   <button type="submit" class="button" style="width:100%;">
     Aanmelden 🚀
   </button>
@@ -78,13 +67,46 @@
 </button>
 
 <!-- ✅ SUCCESS -->
-<div id="successMessage" style="display:none;text-align:center;">
+<div id="successMessage" style="display:none;text-align:center; color:white; margin-top:20px;">
   <h3>✅ Gelukt!</h3>
   <p>Je bent aangemeld.</p>
   <p>Je ontvangt binnenkort je eerste workout 💪</p>
 </div>
 
 </form>
+
+<style>
+/* ✅ DARK INPUT STYLE (BELANGRIJKSTE FIX) */
+.input-dark {
+  width:100%;
+  padding:14px;
+  margin-bottom:10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color:#fff;
+  font-size:15px;
+}
+
+.input-dark::placeholder {
+  color:#aaa;
+}
+
+.input-dark:focus {
+  outline:none;
+  border:1px solid #22c55e;
+  box-shadow:0 0 0 2px rgba(34,197,94,0.2);
+}
+
+select.input-dark {
+  color:#fff;
+}
+
+select.input-dark option {
+  color:#000;
+}
+</style>
+
 <script>
 const steps = document.querySelectorAll(".step");
 const nextBtn = document.getElementById("nextBtn");
