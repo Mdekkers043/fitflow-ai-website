@@ -1,6 +1,6 @@
 <form id="onboardingForm" style="max-width:400px;margin:30px auto 0;">
 
-<p id="progressText" style="font-weight:600;margin-bottom:10px;color:#aaa;">
+<p id="progressText" style="font-weight:600;margin-bottom:10px;color:#fff;">
   Stap 1 van 5
 </p>
 
@@ -62,12 +62,6 @@
   </button>
 </div>
 
-<!-- ✅ RETURN BUTTON -->
-<button type="button" id="prevBtn" class="button" style="width:100%;margin-top:10px;display:none;background:#555;">
-  ← Vorige
-</button>
-
-  
 <!-- ✅ NEXT BUTTON -->
 <button type="button" id="nextBtn" class="button" style="width:100%;margin-top:10px;">
   Volgende →
@@ -132,7 +126,6 @@ select.input-dark option {
 <script>
 const steps = document.querySelectorAll(".step");
 const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
 const finalFields = document.getElementById("finalFields");
 const form = document.getElementById("onboardingForm");
 const successMessage = document.getElementById("successMessage");
@@ -144,26 +137,15 @@ let currentStep = 0;
 const totalSteps = steps.length;
 
 function updateUI() {
-
   steps.forEach((step, i) => {
     step.classList.remove("active");
     if(i === currentStep) step.classList.add("active");
   });
 
-  // progress bar
   let percent = ((currentStep+1)/totalSteps)*100;
   progressBar.style.width = percent + "%";
 
   progressText.innerText = `Stap ${currentStep+1} van ${totalSteps}`;
-
-  // vorige knop tonen/verbergen
-  prevBtn.style.display = currentStep === 0 ? "none" : "block";
-
-  // next knop terugzetten als nodig
-  if (currentStep < totalSteps) {
-    nextBtn.style.display = "block";
-    finalFields.style.display = "none";
-  }
 }
 
 updateUI();
@@ -182,14 +164,6 @@ nextBtn.addEventListener("click", () => {
   } else {
     nextBtn.style.display = "none";
     finalFields.style.display = "block";
-  }
-});
-
-// ✅ TERUG KNOP LOGICA (nieuw)
-prevBtn.addEventListener("click", () => {
-  if (currentStep > 0) {
-    currentStep--;
-    updateUI();
   }
 });
 
