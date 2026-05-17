@@ -1,1 +1,361 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFlow AI • Jouw Persoonlijke AI Coach via WhatsApp</title>
+    <script src="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.tailwindcss.com%2F&data=05%7C02%7Cmarco.dekkers%40eni.com%7Cf001489ed9e6444a13c408deb37bae1f%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145540954963450%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=yKil0ABhb35g7An5z%2Bdr8iGV5915Qkcmj%2FYxUmr0trE%3D&reserved=0"></script>
+    <link rel="stylesheet" href="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdnjs.cloudflare.com%2Fajax%2Flibs%2Ffont-awesome%2F6.6.0%2Fcss%2Fall.min.css&data=05%7C02%7Cmarco.dekkers%40eni.com%7Cf001489ed9e6444a13c408deb37bae1f%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145540954981643%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=Kj4Y%2B5Tu2OzQko4L8o3FtGRRH6SO%2BdECFi2QfqMzggs%3D&reserved=0">
+    <style>
+        @import url('https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Ffonts.googleapis.com%2Fcss2%3Ffamily%3DInter%3Awght%40400%3B500%3B600%3B700%26family%3DSpace%2BGrotesk%3Awght%40500%3B600%3B700%26display%3Dswap&data=05%7C02%7Cmarco.dekkers%40eni.com%7Cf001489ed9e6444a13c408deb37bae1f%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145540954992819%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=xxPChcDPWvFzMPK%2BRkOMMF2w0M6kiwF7u3%2BklACscEM%3D&reserved=0');
 
+        body { font-family: 'Inter', sans-serif; }
+        .heading { font-family: 'Space Grotesk', sans-serif; }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .whatsapp-bubble {
+            background: #dcf8c6;
+            border-radius: 20px 20px 4px 20px;
+        }
+
+        .nav-scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white">
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
+                <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#hoe" class="hover:text-lime-400 transition">Hoe het werkt</a>
+                <a href="#voorbeelden" class="hover:text-lime-400 transition">Voorbeelden</a>
+                <a href="#prijzen" class="hover:text-lime-400 transition">Prijzen</a>
+            </div>
+
+            <a href="#aanmelden"
+               class="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-lime-400 transition-all hover:scale-105">
+                Start gratis
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="pt-12 md:pt-0">
+                <div class="inline-flex items-center gap-2 bg-zinc-900 border border-lime-500/30 text-lime-400 text-sm px-4 py-2 rounded-3xl mb-6">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-lime-500"></span>
+                    </span>
+                    Nieuw: AI die écht met je meedenkt
+                </div>
+
+                <h1 class="text-6xl md:text-7xl font-bold heading leading-tight tracking-tighter mb-6">
+                    Nooit meer twijfelen.<br>
+                    <span class="text-lime-400">Jouw AI-coach</span> in je broekzak.
+                </h1>
+
+                <p class="text-xl text-zinc-400 mb-10 max-w-lg">
+                    Dagelijks een perfecte workout via WhatsApp.
+                    Persoonlijk aangepast aan jouw niveau, herstel en doelen.
+                    Geen app. Geen gedoe. Alleen resultaat.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#aanmelden"
+                       class="bg-lime-500 hover:bg-lime-400 text-black font-semibold text-lg px-10 py-5 rounded-3xl flex items-center gap-3 transition-all hover:scale-105">
+                        <i class="fa-solid fa-rocket"></i>
+                        Start gratis proefperiode
+                    </a>
+
+                    <a href="#voorbeelden"
+                       class="border border-zinc-700 hover:border-zinc-500 font-medium text-lg px-8 py-5 rounded-3xl flex items-center gap-3 transition">
+                        Bekijk voorbeelden →
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-8 mt-12 text-sm">
+                    <div class="flex -space-x-4">
+                        <div class="w-8 h-8 bg-zinc-700 border-2 border-zinc-950 rounded-full overflow-hidden">
+                            <img src="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Frandomuser.me%2Fapi%2Fportraits%2Fwomen%2F44.jpg&data=05%7C02%7Cmarco.dekkers%40eni.com%7Cf001489ed9e6444a13c408deb37bae1f%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145540955003515%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=0%2FLUFFHW4p6kSLcigYMEQlFE761GWrSBECQNTJS9JTk%3D&reserved=0" alt="">
+                        </div>
+                        <div class="w-8 h-8 bg-zinc-700 border-2 border-zinc-950 rounded-full overflow-hidden">
+                            <img src="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Frandomuser.me%2Fapi%2Fportraits%2Fmen%2F32.jpg&data=05%7C02%7Cmarco.dekkers%40eni.com%7Cf001489ed9e6444a13c408deb37bae1f%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145540955014001%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=FppuIK6rZufSbBxHvrVIJ%2BuYQ4LpdTtkfDTDavpREEM%3D&reserved=0" alt="">
+                        </div>
+                        <div class="w-8 h-8 bg-zinc-700 border-2 border-zinc-950 rounded-full overflow-hidden">
+                            <img src="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Frandomuser.me%2Fapi%2Fportraits%2Fwomen%2F68.jpg&data=05%7C02%7Cmarco.dekkers%40eni.com%7Cf001489ed9e6444a13c408deb37bae1f%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145540955024250%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=pSNQO%2Bp%2B4jtTkZu0bgSepNAq4n30gChsiUwIuTHPjKE%3D&reserved=0" alt="">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-semibold">+340 Nederlanders al bezig</div>
+                        <div class="text-lime-400 text-sm">Gemiddeld 4,8 kg in 6 weken</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero visual -->
+            <div class="relative">
+                <div class="bg-zinc-900 rounded-3xl p-4 shadow-2xl border border-zinc-800">
+                    <div class="bg-black rounded-2xl p-6">
+                        <div class="flex justify-between items-center mb-6 text-xs">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <span class="font-medium">FitFlow AI</span>
+                            </div>
+                            <span class="text-zinc-500">Vandaag • 07:12</span>
+                        </div>
+
+                        <div class="space-y-6">
+                            <!-- WhatsApp message -->
+                            <div class="max-w-[85%] whatsapp-bubble p-4 text-black">
+                                <p class="font-medium">Goedemorgen! 🔥</p>
+                                <p class="mt-2">Vandaag focus op benen + core. Klaar voor een killer workout?</p>
+                            </div>
+
+                            <div class="flex justify-end">
+                                <div class="bg-zinc-800 text-white p-4 rounded-3xl rounded-br-none max-w-[75%]">
+                                    <p>Ja, let's go 💪</p>
+                                </div>
+                            </div>
+
+                            <div class="max-w-[85%] whatsapp-bubble p-4 text-black">
+                                <p>Top! Hier is je workout van vandaag:</p>
+                                <ul class="text-sm mt-3 space-y-2">
+                                    <li class="flex justify-between"><span>1. Squats</span><span class="font-mono">4x12</span></li>
+                                    <li class="flex justify-between"><span>2. Romanian Deadlift</span><span class="font-mono">4x10</span></li>
+                                    <li class="flex justify-between"><span>3. Bulgarian Split Squats</span><span class="font-mono">3x12</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating badges -->
+                <div class="absolute -top-6 -right-6 bg-zinc-900 border border-lime-400 text-lime-400 px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3">
+                    <i class="fa-solid fa-fire text-orange-500"></i>
+                    <div>
+                        <div class="text-xs">Huidige streak</div>
+                        <div class="font-bold text-2xl">17 dagen</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <div class="bg-zinc-900 py-4 border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center items-center gap-x-10 gap-y-4 text-sm text-zinc-400">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-lime-400"></i>
+                <span>Veilig via WhatsApp</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-lime-400"></i>
+                <span>Geen app installeren</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-lime-400"></i>
+                <span>AI past zich realtime aan</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-check text-lime-400"></i>
+                <span>30 dagen geld-terug</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOE HET WERKT -->
+    <section id="hoe" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold heading tracking-tight">Zo simpel is het</h2>
+                <p class="text-zinc-400 mt-4 text-lg">Van aanmelden tot resultaat in 4 stappen</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="bg-zinc-900 p-8 rounded-3xl">
+                    <div class="text-5xl mb-6">1️⃣</div>
+                    <h3 class="text-2xl font-semibold mb-3">Vertel ons je doel</h3>
+                    <p class="text-zinc-400">Afvallen, spiermassa, kracht, conditie... kies wat jij wilt bereiken.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl">
+                    <div class="text-5xl mb-6">2️⃣</div>
+                    <h3 class="text-2xl font-semibold mb-3">AI maakt jouw plan</h3>
+                    <p class="text-zinc-400">Op basis van jouw niveau, materiaal en beschikbare tijd.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl">
+                    <div class="text-5xl mb-6">3️⃣</div>
+                    <h3 class="text-2xl font-semibold mb-3">Ontvang dagelijks je workout</h3>
+                    <p class="text-zinc-400">Via WhatsApp, precies op het juiste moment.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl">
+                    <div class="text-5xl mb-6">4️⃣</div>
+                    <h3 class="text-2xl font-semibold mb-3">Train &amp; chat met AI</h3>
+                    <p class="text-zinc-400">Stuur "pijn in knie", "te zwaar" of "DONE" en de AI past alles aan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VOORBEELDEN -->
+    <section id="voorbeelden" class="py-24 bg-zinc-950">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-5xl font-bold heading text-center mb-16">Zo ziet het eruit in de praktijk</h2>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Chat 1 -->
+                <div class="bg-zinc-900 rounded-3xl overflow-hidden">
+                    <div class="bg-zinc-800 px-6 py-4 flex items-center gap-3">
+                        <div class="w-8 h-8 bg-lime-500 rounded-2xl flex items-center justify-center text-black">🤖</div>
+                        <div>
+                            <div class="font-semibold">FitFlow AI</div>
+                            <div class="text-xs text-zinc-500">Online</div>
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-8 text-sm">
+                        <div class="whatsapp-bubble p-5 text-black max-w-[85%]">
+                            <p>Je vorige training ging super! Vandaag doen we een push-pull variant.</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="bg-zinc-800 inline-block p-5 rounded-3xl rounded-br-none">
+                                Knie voelt nog niet 100%
+                            </div>
+                        </div>
+                        <div class="whatsapp-bubble p-5 text-black max-w-[85%]">
+                            <p>Begrepen ✅ We vervangen squats door lunges en voegen extra core toe.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat 2 -->
+                <div class="bg-zinc-900 rounded-3xl overflow-hidden">
+                    <div class="p-8 space-y-6">
+                        <div class="flex justify-center">
+                            <div class="bg-black text-lime-400 text-xs px-4 py-2 rounded-full">Reminder • 17:45</div>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-2xl">Tijd om te trainen 🔥</p>
+                            <p class="text-zinc-400 mt-2">Je hebt vandaag nog geen workout gedaan.</p>
+                        </div>
+                        <button onclick="alert('Dit zou in het echt een knop in WhatsApp zijn!')"
+                                class="w-full bg-lime-500 text-black py-4 rounded-2xl font-semibold">
+                            Start workout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIJZEN -->
+    <section id="prijzen" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold heading">Kies jouw plan</h2>
+                <p class="text-zinc-400 mt-4">Start vandaag nog gratis</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Proef -->
+                <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700">
+                    <div class="text-lime-400 font-medium mb-2">START</div>
+                    <div class="text-5xl font-bold">€0</div>
+                    <div class="text-zinc-400">3 dagen volledig gratis</div>
+
+                    <ul class="my-10 space-y-4">
+                        <li class="flex gap-3"><i class="fa-solid fa-check text-lime-400 mt-0.5"></i> Volledige AI toegang</li>
+                        <li class="flex gap-3"><i class="fa-solid fa-check text-lime-400 mt-0.5"></i> Dagelijkse workouts</li>
+                        <li class="flex gap-3"><i class="fa-solid fa-check text-lime-400 mt-0.5"></i> Basis coaching</li>
+                    </ul>
+                    <a href="#aanmelden" class="block w-full text-center py-5 border border-zinc-600 hover:border-white rounded-2xl font-semibold transition">Start gratis proef</a>
+                </div>
+
+                <!-- PRO - Meest gekozen -->
+                <div class="bg-gradient-to-b from-lime-500 to-lime-600 text-black rounded-3xl p-8 relative scale-110 shadow-2xl">
+                    <div class="absolute -top-4 right-8 bg-black text-white text-xs font-bold px-6 py-2 rounded-3xl">MEEST GEKOZEN</div>
+
+                    <div class="font-medium mb-2">PRO</div>
+                    <div class="flex items-baseline">
+                        <span class="text-6xl font-bold">€5</span>
+                        <span class="text-xl ml-2">/maand</span>
+                    </div>
+
+                    <ul class="my-10 space-y-4 text-base">
+                        <li class="flex gap-3"><i class="fa-solid fa-check mt-0.5"></i> Onbeperkte persoonlijke workouts</li>
+                        <li class="flex gap-3"><i class="fa-solid fa-check mt-0.5"></i> Geavanceerde AI coaching</li>
+                        <li class="flex gap-3"><i class="fa-solid fa-check mt-0.5"></i> Progress tracking</li>
+                        <li class="flex gap-3"><i class="fa-solid fa-check mt-0.5"></i> Prioriteit support</li>
+                    </ul>
+                    <a href="#aanmelden" class="block w-full text-center py-5 bg-black text-white rounded-2xl font-bold hover:bg-zinc-900 transition">Nu starten voor €5/maand</a>
+                </div>
+
+                <!-- Jaar -->
+                <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700">
+                    <div class="text-lime-400 font-medium mb-2">JAAR</div>
+                    <div class="text-5xl font-bold">€49</div>
+                    <div class="text-zinc-400">per jaar <span class="line-through text-sm">€60</span></div>
+
+                    <div class="my-4 text-lime-400 font-medium">Bespaar €11</div>
+
+                    <ul class="my-10 space-y-4">
+                        <li class="flex gap-3"><i class="fa-solid fa-check text-lime-400 mt-0.5"></i> Alles uit PRO</li>
+                        <li class="flex gap-3"><i class="fa-solid fa-check text-lime-400 mt-0.5"></i> Beste prijs</li>
+                    </ul>
+                    <a href="#aanmelden" class="block w-full text-center py-5 border border-zinc-600 hover:border-white rounded-2xl font-semibold transition">Kies Jaarplan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="aanmelden" class="py-28 bg-gradient-to-b from-black to-zinc-950">
+        <div class="max-w-2xl mx-auto text-center px-6">
+            <h2 class="text-5xl font-bold heading mb-6">Klaar om serieus te worden?</h2>
+            <p class="text-2xl text-zinc-400 mb-10">Meld je aan en ontvang binnen 2 minuten je eerste workout.</p>
+
+            <a href="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwa.me%2F31612345678%3Ftext%3DHoi%2520FitFlow%252C%2520ik%2520wil%2520graag%2520starten&data=05%7C02%7Cmarco.dekkers%40eni.com%7Cf001489ed9e6444a13c408deb37bae1f%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145540955035291%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=gnD47HrzXDY42pC%2FBDmRX%2BDHScKZ9rSEQkNA%2BTKDbqM%3D&reserved=0!"
+               target="_blank"
+               class="inline-flex items-center gap-4 bg-white text-black text-2xl font-semibold px-12 py-8 rounded-3xl hover:bg-lime-400 transition-all hover:scale-105">
+                <i class="fa-brands fa-whatsapp text-4xl text-green-500"></i>
+                Start via WhatsApp
+            </a>
+
+            <p class="text-xs text-zinc-500 mt-8">Geen creditcard nodig • Direct aan de slag</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500 text-sm">
+            <p>© 2026 FitFlow AI • Een side-project met ❤️ voor betere fitness</p>
+            <p class="mt-2">Privacy • Voorwaarden • Contact</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Tailwind script already loaded via CDN
+    </script>
+</body>
+</html>
