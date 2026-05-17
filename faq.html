@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ • FitFlow AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+        body { font-family: 'Inter', sans-serif; }
+        .heading { font-family: 'Space Grotesk', sans-serif; }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .faq-question {
+            transition: all 0.3s ease;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition">
+                <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
+                <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
+            </a>
+            <a href="index.html" class="text-zinc-400 hover:text-white transition">← Terug naar homepage</a>
+        </div>
+    </nav>
+
+    <section class="hero-bg min-h-screen pt-24 pb-20">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 bg-zinc-900 border border-lime-500/30 text-lime-400 text-sm px-4 py-2 rounded-3xl mb-6">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Veelgestelde vragen</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold heading tracking-tighter mb-4">
+                    FAQ
+                </h1>
+                <p class="text-zinc-400 text-lg">Alles wat je wilt weten over FitFlow AI</p>
+            </div>
+
+            <!-- FAQ Accordion -->
+            <div class="space-y-4" id="faq-container">
+                <!-- JavaScript vult dit automatisch -->
+            </div>
+
+            <div class="text-center mt-16">
+                <p class="text-zinc-400 mb-4">Heb je nog een andere vraag?</p>
+                <a href="contact.html" 
+                   class="inline-flex items-center gap-3 bg-lime-500 hover:bg-lime-400 text-black font-semibold px-8 py-5 rounded-3xl transition-all">
+                    <i class="fa-solid fa-headset"></i>
+                    Neem contact met ons op
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500 text-sm">
+            <p>© 2026 FitFlow AI • Een side-project met ❤️ voor betere fitness</p>
+        </div>
+    </footer>
+
+    <script>
+        const faqs = [
+            {
+                q: "Wat is FitFlow AI precies?",
+                a: "FitFlow AI is jouw persoonlijke AI-fitnesscoach die via WhatsApp elke dag een op maat gemaakte workout stuurt. De AI past zich aan aan jouw niveau, doelen, beschikbare tijd en eventuele blessures."
+            },
+            {
+                q: "Hoe werkt de gratis proefperiode?",
+                a: "Je kunt 3 dagen volledig gratis gebruik maken van de dienst. Je vult je gegevens in, kiest je doel en ontvangt direct je eerste workout. Geen creditcard nodig. Daarna kun je zelf beslissen of je wilt doorgaan."
+            },
+            {
+                q: "Welke abonnementen zijn er?",
+                a: "We bieden twee opties:<br>• PRO: €5 per maand<br>• Jaarplan: €49 per jaar (beste deal)<br>Je kunt op ieder moment opzeggen."
+            },
+            {
+                q: "Moet ik een app downloaden?",
+                a: "Nee! Je hebt helemaal geen app nodig. Alles gebeurt via WhatsApp. Je chat gewoon zoals je normaal doet."
+            },
+            {
+                q: "Kan ik de workouts aanpassen als iets niet lukt?",
+                a: "Ja! Je kunt altijd reageren met berichten zoals \"te zwaar\", \"knie pijn\", \"minder tijd vandaag\" of \"DONE\". De AI past je volgende workout direct aan."
+            },
+            {
+                q: "Is het veilig om te trainen met de AI?",
+                a: "FitFlow AI geeft geen medisch advies. Bij blessures, medische aandoeningen of twijfel raden we altijd aan om eerst een huisarts of fysiotherapeut te raadplegen."
+            },
+            {
+                q: "Hoe zeg ik mijn abonnement op?",
+                a: "Je kunt op ieder moment opzeggen via WhatsApp of per e-mail. Na opzegging kun je de dienst gebruiken tot het einde van je betaalde periode."
+            },
+            {
+                q: "Worden mijn gegevens veilig bewaard?",
+                a: "Ja. We nemen jouw privacy zeer serieus en voldoen aan de AVG/GDPR. Meer informatie vind je in onze <a href='privacy.html' class='text-lime-400 hover:underline'>Privacyverklaring</a>."
+            },
+            {
+                q: "Hoe snel reageert de AI?",
+                a: "De AI reageert meestal binnen enkele seconden. Bij drukte kan het iets langer duren, maar maximaal een paar minuten."
+            },
+            {
+                q: "Kan ik FitFlow AI met vrienden gebruiken?",
+                a: "Elk account is persoonlijk. Je mag je account niet delen met anderen."
+            }
+        ];
+
+        const container = document.getElementById('faq-container');
+
+        faqs.forEach((faq, index) => {
+            const item = document.createElement('div');
+            item.className = `faq-item bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800`;
+            item.innerHTML = `
+                <button class="faq-question w-full px-8 py-6 text-left flex items-center justify-between hover:bg-zinc-800 transition group">
+                    <span class="font-medium text-lg">${faq.q}</span>
+                    <i class="fa-solid fa-chevron-down faq-icon text-lime-400 transition-transform"></i>
+                </button>
+                <div class="faq-answer px-8 pb-6 text-zinc-400 leading-relaxed">
+                    ${faq.a}
+                </div>
+            `;
+            container.appendChild(item);
+
+            // Click functionality
+            const button = item.querySelector('.faq-question');
+            button.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all others
+                document.querySelectorAll('.faq-item').forEach(el => {
+                    el.classList.remove('active');
+                });
+
+                // Toggle current
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
