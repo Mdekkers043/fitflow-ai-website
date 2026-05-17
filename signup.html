@@ -184,6 +184,11 @@
     </div>
 
     <script>
+        const supabase = window.supabase.createClient(
+        "https://yjopbpjjusidgmobsazs.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc"
+        );
+        
         // Tailwind script already loaded
         let currentStep = 1;
         let selectedGoal = '';
@@ -235,15 +240,58 @@
             selectedLoc = btn.textContent;
         }
 
-        function submitRegistration() {
-            const naam = document.getElementById('naam').value;
-            const email = document.getElementById('email').value;
-            const whatsapp = document.getElementById('whatsapp').value;
+       
+async function submitRegistration() {
 
-            if (!naam || !email || !whatsapp || !selectedGoal || !selectedFreq || !selectedLoc) {
-                alert("Vul alsjeblieft alle velden in.");
-                return;
-            }
+    const naam = document.getElementById('naam').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('wachtwoord').value;
+    const whatsapp = document.getElementById('whatsapp').value;
+
+    if (!naam || !email || !password || !whatsapp || !selectedGoal || !selectedFreq || !selectedLoc) {
+        alert("Vul alsjeblieft alle velden in.");
+        return;
+    }
+
+    try {
+
+        // ✅ 1. ACCOUNT MAKEN (Supabase Auth)
+        const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password
+        });
+
+        if (error) throw error;
+
+        // ✅ 2. DATA OPSLAAN IN DATABASE
+        const { error: dbError } = await supabase
+            .from('users')
+            .insert([{
+                user_id: data.user.id,
+                name: naam,
+                email: email,
+                phone: whatsapp,
+                goal: selectedGoal,
+                days_per_week: selectedFreq,
+                location: selectedLoc,
+                streak: 0,
+                total_workouts: 0,
+                subscription_active: false,
+                trial_ends_at: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
+            }]);
+
+        if (dbError) throw dbError;
+
+        // ✅ 3. SUCCESS UI (blijft hetzelfde)
+        console.log("✅ Account opgeslagen");
+        document.getElementById('success-modal').classList.remove('hidden');
+
+    } catch (error) {
+        console.error(error);
+        alert("Er ging iets mis: " + error.message);
+    }
+}
+
 
             // Hier zou normaal een API call komen
             console.log("Account aangemaakt:", {naam, email, whatsapp, doel: selectedGoal, freq: selectedFreq, locatie: selectedLoc});
