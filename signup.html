@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitFlow AI • Account Aanmaken</title>
     <script src="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.tailwindcss.com%2F&data=05%7C02%7Cmarco.dekkers%40eni.com%7C9b4612688879478e584f08deb3800591%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145559600818093%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=K46Evyt6wkBtoxrFmtJhqMlXYpvefmoQzCnYR1v4k2k%3D&reserved=0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdnjs.cloudflare.com%2Fajax%2Flibs%2Ffont-awesome%2F6.6.0%2Fcss%2Fall.min.css&data=05%7C02%7Cmarco.dekkers%40eni.com%7C9b4612688879478e584f08deb3800591%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145559600843180%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=DG7OheIboGQhWSlQdZIC4%2F%2FE2n8kRzo%2FvPbEJnKzYJg%3D&reserved=0">
     <style>
         @import url('https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Ffonts.googleapis.com%2Fcss2%3Ffamily%3DInter%3Awght%40400%3B500%3B600%3B700%26family%3DSpace%2BGrotesk%3Awght%40500%3B600%3B700%26display%3Dswap&data=05%7C02%7Cmarco.dekkers%40eni.com%7C9b4612688879478e584f08deb3800591%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145559600854398%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=YrUStACeC7dfGgZF8CeRC4rapO4pNI5gUfo8xoqI5Ok%3D&reserved=0');
@@ -184,63 +183,83 @@
         </div>
     </div>
 
-   <script>
-    // === SUPABASE CONFIG ===
-    const supabaseUrl = https://yjopbpjjusidgmobsazs.supabase.co;   // ← vul in
-    const supabaseAnonKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc;                           // ← vul in (anon/public key)
+    <script>
+        // Tailwind script already loaded
+        let currentStep = 1;
+        let selectedGoal = '';
+        let selectedFreq = '';
+        let selectedLoc = '';
 
-    const supabase = Supabase.createClient(supabaseUrl, supabaseAnonKey);
+        function nextStep() {
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
 
-    // ... je bestaande variabelen (currentStep, selectedGoal etc.) blijven hetzelfde
-
-    async function submitRegistration() {
-        const naam = document.getElementById('naam').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('wachtwoord').value;
-        const whatsapp = document.getElementById('whatsapp').value.trim();
-
-        if (!naam || !email || !password || !whatsapp || !selectedGoal || !selectedFreq || !selectedLoc) {
-            alert("Vul alsjeblieft alle velden in.");
-            return;
+            document.getElementById('step1-indicator').classList.add('text-zinc-500');
+            document.getElementById('step1-indicator').classList.remove('text-lime-400');
+            document.getElementById('step2-indicator').classList.add('text-lime-400');
         }
 
-        try {
-            // 1. Account aanmaken via Supabase Auth
-            const { data: authData, error: authError } = await supabase.auth.signUp({
-                email: email,
-                password: password,
-                options: {
-                    data: { naam: naam } // wordt in user_metadata gezet
-                }
-            });
+        function prevStep() {
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step1').classList.add('active');
 
-            if (authError) throw authError;
+            document.getElementById('step2-indicator').classList.remove('text-lime-400');
+            document.getElementById('step1-indicator').classList.add('text-lime-400');
+        }
 
-            // 2. Profiel aanmaken in profiles tabel
-            if (authData.user) {
-                const { error: profileError } = await supabase
-                    .from('profiles')
-                    .insert({
-                        user_id: authData.user.id,
-                        naam: naam,
-                        whatsapp: whatsapp,
-                        hoofddoel: selectedGoal,
-                        trainingsfrequentie: selectedFreq,
-                        trainingslocatie: selectedLoc
-                    });
+        // Goal options
+        const goals = ["Afvallen", "Spiermassa opbouwen", "Kracht opbouwen", "Conditie verbeteren", "Gewoon fitter worden"];
+        const goalContainer = document.getElementById('doel-options');
 
-                if (profileError) throw profileError;
+        goals.forEach(goal => {
+            const btn = document.createElement('button');
+            btn.className = "goal-btn py-4 rounded-2xl border border-zinc-700 hover:border-lime-500 transition text-sm";
+            btn.textContent = goal;
+            btn.onclick = () => {
+                document.querySelectorAll('.goal-btn').forEach(b => b.classList.remove('border-lime-500', 'bg-lime-500/10'));
+                btn.classList.add('border-lime-500', 'bg-lime-500/10');
+                selectedGoal = goal;
+            };
+            goalContainer.appendChild(btn);
+        });
+
+        function selectFreq(btn) {
+            document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('border-lime-500', 'bg-lime-500/10'));
+            btn.classList.add('border-lime-500', 'bg-lime-500/10');
+            selectedFreq = btn.textContent;
+        }
+
+        function selectLocation(btn) {
+            document.querySelectorAll('.loc-btn').forEach(b => b.classList.remove('border-lime-500', 'bg-lime-500/10'));
+            btn.classList.add('border-lime-500', 'bg-lime-500/10');
+            selectedLoc = btn.textContent;
+        }
+
+        function submitRegistration() {
+            const naam = document.getElementById('naam').value;
+            const email = document.getElementById('email').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+
+            if (!naam || !email || !whatsapp || !selectedGoal || !selectedFreq || !selectedLoc) {
+                alert("Vul alsjeblieft alle velden in.");
+                return;
             }
 
-            // Succes!
-            document.getElementById('success-modal').classList.remove('hidden');
-            console.log("✅ Account succesvol aangemaakt");
+            // Hier zou normaal een API call komen
+            console.log("Account aangemaakt:", {naam, email, whatsapp, doel: selectedGoal, freq: selectedFreq, locatie: selectedLoc});
 
-        } catch (error) {
-            console.error(error);
-            alert("Er ging iets mis: " + error.message);
+            document.getElementById('success-modal').classList.remove('hidden');
         }
-    }
-</script>
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
