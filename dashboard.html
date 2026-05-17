@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Profiel - FitFlow AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+        body { font-family: 'Inter', sans-serif; }
+        .heading { font-family: 'Space Grotesk', sans-serif; }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 w-full z-50 bg-zinc-950 border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
+                <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
+            </div>
+
+            <div class="flex items-center gap-8 text-sm">
+                <a href="dashboard.html" class="text-lime-400 font-semibold">Profiel</a>
+                <a href="#" class="hover:text-lime-400 transition">Workouts</a>
+                <a href="#" class="hover:text-lime-400 transition">Progressie</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div id="userInfo" class="text-sm text-right hidden">
+                    <div id="userName" class="font-medium"></div>
+                    <div id="userEmail" class="text-zinc-500 text-xs"></div>
+                </div>
+                <button onclick="logout()" 
+                        class="bg-zinc-800 hover:bg-zinc-700 px-5 py-2.5 rounded-2xl text-sm font-medium transition">
+                    Uitloggen
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-12 hero-bg min-h-screen">
+        <div class="max-w-4xl mx-auto px-6">
+            
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h1 class="text-5xl font-bold heading tracking-tight">Mijn Profiel</h1>
+                    <p class="text-zinc-400 mt-2">Beheer je gegevens en persoonlijke instellingen</p>
+                </div>
+                <div class="text-lime-400">
+                    <i class="fa-solid fa-circle-check text-3xl"></i>
+                </div>
+            </div>
+
+            <div class="bg-zinc-900 rounded-3xl p-10 border border-zinc-800">
+                <div id="errorMessage" class="hidden bg-red-500/10 border border-red-500 text-red-400 px-5 py-4 rounded-2xl mb-8"></div>
+                <div id="successMessage" class="hidden bg-lime-500/10 border border-lime-500 text-lime-400 px-5 py-4 rounded-2xl mb-8"></div>
+
+                <form id="profileForm" class="grid md:grid-cols-2 gap-8">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-zinc-400 mb-2">Volledige naam</label>
+                        <input type="text" id="name" 
+                               class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-6 py-4 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-400 mb-2">E-mailadres</label>
+                        <input type="email" id="email" readonly
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-6 py-4 outline-none text-zinc-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-400 mb-2">Telefoonnummer</label>
+                        <input type="tel" id="phone" 
+                               class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-6 py-4 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-400 mb-2">Doel</label>
+                        <select id="goal" 
+                                class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-6 py-4 outline-none">
+                            <option value="">Kies je doel</option>
+                            <option value="Afvallen">Afvallen</option>
+                            <option value="Spiermassa opbouwen">Spiermassa opbouwen</option>
+                            <option value="Kracht opbouwen">Kracht opbouwen</option>
+                            <option value="Conditie verbeteren">Conditie verbeteren</option>
+                            <option value="Algemene gezondheid">Algemene gezondheid</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-400 mb-2">Dagen per week</label>
+                        <select id="days_per_week" 
+                                class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-6 py-4 outline-none">
+                            <option value="">Kies aantal dagen</option>
+                            <option value="2">2 dagen</option>
+                            <option value="3">3 dagen</option>
+                            <option value="4">4 dagen</option>
+                            <option value="5">5 dagen</option>
+                            <option value="6">6 dagen</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-400 mb-2">Locatie / Sportschool</label>
+                        <input type="text" id="location" 
+                               class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-6 py-4 outline-none"
+                               placeholder="Thuis, Basic-Fit Amsterdam, etc.">
+                    </div>
+
+                    <div class="md:col-span-2 mt-6">
+                        <button type="submit" id="saveButton"
+                                class="w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold py-5 rounded-2xl text-lg transition-all hover:scale-105">
+                            Wijzigingen opslaan
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Extra info card -->
+            <div class="mt-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl p-8 text-center">
+                <p class="text-zinc-400">Je bent aangemeld bij FitFlow AI</p>
+                <p class="text-lime-400 font-medium mt-1">Volgende workout wordt morgen gestuurd via WhatsApp</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const supabaseUrl = 'https://jouw-project-ref.supabase.co';   // ← VUL IN
+        const supabaseAnonKey = 'eyJ...';                             // ← VUL IN
+
+        const supabase = Supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+        let currentUserId = null;
+
+        // Haal sessie op en laad profiel
+        async function loadProfile() {
+            const { data: { session } } = await supabase.auth.getSession();
+            
+            if (!session) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            currentUserId = session.user.id;
+
+            // Vul basisgegevens
+            document.getElementById('userName').textContent = session.user.user_metadata?.name || session.user.email.split('@')[0];
+            document.getElementById('userEmail').textContent = session.user.email;
+            document.getElementById('email').value = session.user.email;
+
+            // Haal profiel uit database
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('user_id', currentUserId)
+                .single();
+
+            if (profile) {
+                document.getElementById('name').value = profile.name || '';
+                document.getElementById('phone').value = profile.phone || '';
+                document.getElementById('goal').value = profile.goal || '';
+                document.getElementById('days_per_week').value = profile.days_per_week || '';
+                document.getElementById('location').value = profile.location || '';
+            }
+        }
+
+        // Form submit
+        document.getElementById('profileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const saveButton = document.getElementById('saveButton');
+            saveButton.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Opslaan...`;
+            saveButton.disabled = true;
+
+            const profileData = {
+                user_id: currentUserId,
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                goal: document.getElementById('goal').value,
+                days_per_week: document.getElementById('days_per_week').value,
+                location: document.getElementById('location').value,
+            };
+
+            const { error } = await supabase
+                .from('profiles')
+                .upsert(profileData, { onConflict: 'user_id' });
+
+            if (error) {
+                showMessage('error', 'Er ging iets mis bij het opslaan.');
+            } else {
+                showMessage('success', 'Profiel succesvol bijgewerkt!');
+            }
+
+            saveButton.innerHTML = 'Wijzigingen opslaan';
+            saveButton.disabled = false;
+        });
+
+        function showMessage(type, text) {
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            if (type === 'error') {
+                errorDiv.textContent = text;
+                errorDiv.classList.remove('hidden');
+                successDiv.classList.add('hidden');
+            } else {
+                successDiv.textContent = text;
+                successDiv.classList.remove('hidden');
+                errorDiv.classList.add('hidden');
+            }
+        }
+
+        async function logout() {
+            await supabase.auth.signOut();
+            window.location.href = 'index.html';
+        }
+
+        // Laad de pagina
+        window.onload = loadProfile;
+    </script>
+</body>
+</html>
