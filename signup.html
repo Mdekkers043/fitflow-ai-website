@@ -4,28 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitFlow AI • Account Aanmaken</title>
-    <script src="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.tailwindcss.com%2F&data=05%7C02%7Cmarco.dekkers%40eni.com%7C9b4612688879478e584f08deb3800591%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145559600818093%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=K46Evyt6wkBtoxrFmtJhqMlXYpvefmoQzCnYR1v4k2k%3D&reserved=0"></script>
-    <link rel="stylesheet" href="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdnjs.cloudflare.com%2Fajax%2Flibs%2Ffont-awesome%2F6.6.0%2Fcss%2Fall.min.css&data=05%7C02%7Cmarco.dekkers%40eni.com%7C9b4612688879478e584f08deb3800591%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145559600843180%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=DG7OheIboGQhWSlQdZIC4%2F%2FE2n8kRzo%2FvPbEJnKzYJg%3D&reserved=0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        @import url('https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Ffonts.googleapis.com%2Fcss2%3Ffamily%3DInter%3Awght%40400%3B500%3B600%3B700%26family%3DSpace%2BGrotesk%3Awght%40500%3B600%3B700%26display%3Dswap&data=05%7C02%7Cmarco.dekkers%40eni.com%7C9b4612688879478e584f08deb3800591%7Cc16e514b893e4a019a30b8fef514a650%7C0%7C0%7C639145559600854398%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=YrUStACeC7dfGgZF8CeRC4rapO4pNI5gUfo8xoqI5Ok%3D&reserved=0');
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
         .heading { font-family: 'Space Grotesk', sans-serif; }
 
         .hero-bg {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
         }
-
-        .whatsapp-bubble {
-            background: #dcf8c6;
-            border-radius: 20px 20px 4px 20px;
-        }
-
-        .nav-scrolled {
-            background-color: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(12px);
-        }
-
         .form-step {
             display: none;
         }
@@ -43,8 +31,7 @@
                 <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
                 <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
             </div>
-
-            <a href="/" class="text-zinc-400 hover:text-white transition">← Terug naar homepage</a>
+            <a href="index.html" class="text-zinc-400 hover:text-white transition">← Terug naar homepage</a>
         </div>
     </nav>
 
@@ -59,7 +46,6 @@
                     </span>
                     Stap 1 van 2 • Gratis starten
                 </div>
-
                 <h1 class="text-5xl md:text-6xl font-bold heading leading-tight tracking-tighter mb-4">
                     Jouw persoonlijke AI-coach<br>
                     <span class="text-lime-400">wordt aangemaakt</span>
@@ -90,31 +76,22 @@
                         <div class="space-y-6">
                             <div>
                                 <label class="block text-zinc-400 text-sm mb-2">Volledige naam</label>
-                                <input type="text" id="naam" required
-                                       class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
+                                <input type="text" id="naam" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
                             </div>
-
                             <div>
                                 <label class="block text-zinc-400 text-sm mb-2">E-mailadres</label>
-                                <input type="email" id="email" required
-                                       class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
+                                <input type="email" id="email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
                             </div>
-
                             <div>
                                 <label class="block text-zinc-400 text-sm mb-2">Wachtwoord</label>
-                                <input type="password" id="wachtwoord" required
-                                       class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
+                                <input type="password" id="wachtwoord" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
                             </div>
-
                             <div>
                                 <label class="block text-zinc-400 text-sm mb-2">WhatsApp nummer</label>
-                                <input type="tel" id="whatsapp" placeholder="+31612345678" required
-                                       class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
+                                <input type="tel" id="whatsapp" placeholder="+31612345678" required class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
                             </div>
                         </div>
-
-                        <button type="button" onclick="nextStep()"
-                                class="mt-10 w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold text-lg py-5 rounded-3xl transition-all">
+                        <button type="button" onclick="nextStep()" class="mt-10 w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold text-lg py-5 rounded-3xl transition-all">
                             Volgende stap →
                         </button>
                     </form>
@@ -126,11 +103,8 @@
                     <div class="space-y-6">
                         <div>
                             <label class="block text-zinc-400 text-sm mb-3">Wat is jouw hoofddoel?</label>
-                            <div class="grid grid-cols-2 gap-3" id="doel-options">
-                                <!-- Options filled by JS -->
-                            </div>
+                            <div class="grid grid-cols-2 gap-3" id="doel-options"></div>
                         </div>
-
                         <div>
                             <label class="block text-zinc-400 text-sm mb-3">Hoe vaak wil je trainen per week?</label>
                             <div class="grid grid-cols-4 gap-3">
@@ -140,7 +114,6 @@
                                 <button onclick="selectFreq(this)" class="freq-btn py-4 rounded-2xl border border-zinc-700 hover:border-lime-500 transition">5x+</button>
                             </div>
                         </div>
-
                         <div>
                             <label class="block text-zinc-400 text-sm mb-3">Waar train je meestal?</label>
                             <div class="grid grid-cols-3 gap-3">
@@ -152,12 +125,10 @@
                     </div>
 
                     <div class="flex gap-4 mt-10">
-                        <button onclick="prevStep()"
-                                class="flex-1 py-5 border border-zinc-600 hover:border-white rounded-3xl font-semibold transition">
+                        <button onclick="prevStep()" class="flex-1 py-5 border border-zinc-600 hover:border-white rounded-3xl font-semibold transition">
                             Vorige
                         </button>
-                        <button onclick="submitRegistration()"
-                                class="flex-1 bg-lime-500 hover:bg-lime-400 text-black font-semibold py-5 rounded-3xl transition-all">
+                        <button onclick="submitRegistration()" class="flex-1 bg-lime-500 hover:bg-lime-400 text-black font-semibold py-5 rounded-3xl transition-all">
                             Account aanmaken &amp; starten
                         </button>
                     </div>
@@ -165,7 +136,7 @@
             </div>
 
             <p class="text-center text-zinc-500 text-sm mt-8">
-                Door je aan te melden ga je akkoord met onze <a href="#" class="underline">voorwaarden</a> en <a href="#" class="underline">privacybeleid</a>.
+                Door je aan te melden ga je akkoord met onze <a href="voorwaarden.html" class="underline">voorwaarden</a> en <a href="privacy.html" class="underline">privacybeleid</a>.
             </p>
         </div>
     </section>
@@ -176,24 +147,29 @@
             <div class="text-6xl mb-6">🎉</div>
             <h2 class="text-3xl font-bold mb-4">Account succesvol aangemaakt!</h2>
             <p class="text-zinc-400 mb-8">Je ontvangt binnen enkele seconden een bericht via WhatsApp met je eerste workout.</p>
-            <a href="#" onclick="window.location.href='/'"
-               class="inline-block bg-lime-500 text-black font-semibold px-10 py-4 rounded-3xl hover:bg-lime-400 transition">
+            <a href="index.html" class="inline-block bg-lime-500 text-black font-semibold px-10 py-4 rounded-3xl hover:bg-lime-400 transition">
                 Ga naar mijn dashboard →
             </a>
         </div>
     </div>
 
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // Tailwind script already loaded
-        let currentStep = 1;
+        // ==================== SUPABASE CONFIG ====================
+        const SUPABASE_URL = 'https://yjopbpjjusidgmobsazs.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc';
+
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         let selectedGoal = '';
         let selectedFreq = '';
         let selectedLoc = '';
 
+        // Multi-step form (bestaande functies)
         function nextStep() {
             document.getElementById('step1').classList.remove('active');
             document.getElementById('step2').classList.add('active');
-
             document.getElementById('step1-indicator').classList.add('text-zinc-500');
             document.getElementById('step1-indicator').classList.remove('text-lime-400');
             document.getElementById('step2-indicator').classList.add('text-lime-400');
@@ -202,7 +178,6 @@
         function prevStep() {
             document.getElementById('step2').classList.remove('active');
             document.getElementById('step1').classList.add('active');
-
             document.getElementById('step2-indicator').classList.remove('text-lime-400');
             document.getElementById('step1-indicator').classList.add('text-lime-400');
         }
@@ -235,20 +210,48 @@
             selectedLoc = btn.textContent;
         }
 
-        function submitRegistration() {
-            const naam = document.getElementById('naam').value;
-            const email = document.getElementById('email').value;
-            const whatsapp = document.getElementById('whatsapp').value;
+        // ==================== SUPABASE SUBMIT ====================
+        async function submitRegistration() {
+            const naam = document.getElementById('naam').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
 
             if (!naam || !email || !whatsapp || !selectedGoal || !selectedFreq || !selectedLoc) {
                 alert("Vul alsjeblieft alle velden in.");
                 return;
             }
 
-            // Hier zou normaal een API call komen
-            console.log("Account aangemaakt:", {naam, email, whatsapp, doel: selectedGoal, freq: selectedFreq, locatie: selectedLoc});
+            const submitBtn = document.querySelector('button[onclick="submitRegistration()"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Bezig met aanmaken...';
+            submitBtn.disabled = true;
 
-            document.getElementById('success-modal').classList.remove('hidden');
+            try {
+                const { error } = await supabase
+                    .from('profiles')
+                    .insert([{
+                        naam: naam,
+                        email: email,
+                        whatsapp: whatsapp,
+                        doel: selectedGoal,
+                        trainingsfrequentie: selectedFreq,
+                        locatie: selectedLoc,
+                        abonnement_status: 'trial',
+                        trial_eindigt_op: new Date(Date.now() + 3*24*60*60*1000).toISOString().split('T')[0]
+                    }]);
+
+                if (error) throw error;
+
+                console.log("✅ Account succesvol opgeslagen in Supabase!");
+                document.getElementById('success-modal').classList.remove('hidden');
+
+            } catch (error) {
+                console.error(error);
+                alert("Er ging iets mis. Probeer het nog eens.");
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
         }
 
         // Navbar scroll
