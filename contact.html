@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact • FitFlow AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+        body { font-family: 'Inter', sans-serif; }
+        .heading { font-family: 'Space Grotesk', sans-serif; }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition">
+                <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
+                <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
+            </a>
+            <a href="index.html" class="text-zinc-400 hover:text-white transition">← Terug naar homepage</a>
+        </div>
+    </nav>
+
+    <section class="hero-bg min-h-screen pt-24 pb-20">
+        <div class="max-w-2xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 bg-zinc-900 border border-lime-500/30 text-lime-400 text-sm px-4 py-2 rounded-3xl mb-6">
+                    <i class="fa-solid fa-headset"></i>
+                    <span>Support & Contact</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold heading tracking-tighter mb-4">
+                    Hoe kunnen we je helpen?
+                </h1>
+                <p class="text-zinc-400 text-lg max-w-md mx-auto">
+                    Heb je een vraag, probleem of feedback? We helpen je graag zo snel mogelijk.
+                </p>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="bg-zinc-900 rounded-3xl p-8 md:p-12 shadow-2xl border border-zinc-800">
+                <form id="contact-form" class="space-y-8">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-zinc-400 text-sm mb-2">Naam</label>
+                            <input type="text" id="naam" required
+                                   class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-zinc-400 text-sm mb-2">E-mailadres</label>
+                            <input type="email" id="email" required
+                                   class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-zinc-400 text-sm mb-2">Onderwerp</label>
+                        <select id="onderwerp" required
+                                class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-lime-500 transition">
+                            <option value="">Kies een onderwerp...</option>
+                            <option value="vraag">Algemene vraag</option>
+                            <option value="technisch">Technisch probleem</option>
+                            <option value="abonnement">Abonnement & Betaling</option>
+                            <option value="feedback">Feedback & Suggesties</option>
+                            <option value="anders">Iets anders</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-zinc-400 text-sm mb-2">Je bericht</label>
+                        <textarea id="bericht" rows="6" required
+                                  class="w-full bg-zinc-800 border border-zinc-700 rounded-3xl px-5 py-4 focus:outline-none focus:border-lime-500 transition resize-none"></textarea>
+                    </div>
+
+                    <button type="submit"
+                            class="w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold text-lg py-5 rounded-3xl transition-all flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Bericht versturen
+                    </button>
+                </form>
+            </div>
+
+            <!-- Extra contact opties -->
+            <div class="mt-12 grid md:grid-cols-2 gap-6 text-center">
+                <div class="bg-zinc-900/50 border border-zinc-800 rounded-3xl p-8">
+                    <i class="fa-brands fa-whatsapp text-4xl text-green-500 mb-4"></i>
+                    <h3 class="font-semibold mb-2">WhatsApp</h3>
+                    <p class="text-zinc-400 text-sm">Reageer direct via de chat met FitFlow AI</p>
+                    <a href="https://wa.me/31612345678" target="_blank"
+                       class="mt-4 inline-block text-lime-400 hover:text-lime-300 font-medium">
+                        Open WhatsApp →
+                    </a>
+                </div>
+
+                <div class="bg-zinc-900/50 border border-zinc-800 rounded-3xl p-8">
+                    <i class="fa-solid fa-envelope text-4xl text-lime-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">E-mail</h3>
+                    <p class="text-zinc-400 text-sm">info@fitflow.ai</p>
+                    <a href="mailto:info@fitflow.ai" 
+                       class="mt-4 inline-block text-lime-400 hover:text-lime-300 font-medium">
+                        Stuur e-mail →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[100]">
+        <div class="bg-zinc-900 rounded-3xl p-10 max-w-md text-center">
+            <div class="text-6xl mb-6">✅</div>
+            <h2 class="text-3xl font-bold mb-3">Bericht ontvangen!</h2>
+            <p class="text-zinc-400 mb-8">Bedankt! We reageren zo snel mogelijk op je bericht.</p>
+            <button onclick="window.location.href='index.html'"
+                    class="bg-lime-500 text-black font-semibold px-10 py-4 rounded-3xl hover:bg-lime-400 transition">
+                Terug naar homepage
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500 text-sm">
+            <p>© 2026 FitFlow AI • Een side-project met ❤️ voor betere fitness</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simuleer verzending
+            setTimeout(() => {
+                document.getElementById('success-modal').classList.remove('hidden');
+                this.reset(); // Formulier leegmaken
+            }, 800);
+        });
+
+        // Sluit modal als er buiten geklikt wordt
+        document.getElementById('success-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
