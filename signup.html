@@ -184,10 +184,6 @@
     </div>
 
     <script>
-        
-     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-     const supabase = window.supabase.createClient("https://yjopbpjjusidgmobsazs.supabase.co" , "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc" );
-
         // Tailwind script already loaded
         let currentStep = 1;
         let selectedGoal = '';
@@ -249,41 +245,8 @@
                 return;
             }
 
-            
-try {
-
-    // ✅ 1. ACCOUNT AANMAKEN (auth)
-    const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: document.getElementById('wachtwoord').value
-    });
-
-    if (error) throw error;
-
-    // ✅ 2. DATA OPSLAAN
-    const { error: dbError } = await supabase
-        .from('users')
-        .insert([{
-            user_id: data.user.id,
-            name: naam,
-            email: email,
-            phone: whatsapp,
-            goal: selectedGoal,
-            days_per_week: selectedFreq,
-            location: selectedLoc,
-            subscription_active: false,
-            trial_ends_at: new Date(Date.now() + 3*24*60*60*1000)
-        }]);
-
-    if (dbError) throw dbError;
-
-    console.log("✅ Opgeslagen in Supabase");
-
-} catch (error) {
-    console.error(error);
-    alert("Fout: " + error.message);
-}
-
+            // Hier zou normaal een API call komen
+            console.log("Account aangemaakt:", {naam, email, whatsapp, doel: selectedGoal, freq: selectedFreq, locatie: selectedLoc});
 
             document.getElementById('success-modal').classList.remove('hidden');
         }
