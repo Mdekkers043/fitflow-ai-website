@@ -6,6 +6,8 @@
     <title>Inloggen - FitFlow AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
@@ -52,6 +54,8 @@
                     <p class="text-zinc-400 mt-3">Log in om je workouts te bekijken</p>
                 </div>
 
+                <div id="errorMessage" class="hidden bg-red-500/10 border border-red-500 text-red-400 px-4 py-3 rounded-2xl text-sm mb-6"></div>
+
                 <form id="loginForm" class="space-y-6">
                     <div>
                         <label class="block text-sm font-medium text-zinc-400 mb-2">E-mailadres</label>
@@ -73,9 +77,9 @@
                         </a>
                     </div>
 
-                    <button type="submit"
-                            class="w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold text-lg py-5 rounded-2xl transition-all hover:scale-105">
-                        Inloggen
+                    <button type="submit" id="loginButton"
+                            class="w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold text-lg py-5 rounded-2xl transition-all hover:scale-105 flex items-center justify-center gap-2">
+                        <span id="buttonText">Inloggen</span>
                     </button>
                 </form>
 
@@ -84,24 +88,6 @@
                         Nog geen account? 
                         <a href="signup.html" class="text-lime-400 hover:text-lime-300 font-medium">Meld je gratis aan</a>
                     </p>
-                </div>
-
-                <!-- Optioneel: Social login -->
-                <div class="mt-10">
-                    <div class="relative">
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t border-zinc-700"></div>
-                        </div>
-                        <div class="relative flex justify-center text-sm">
-                            <span class="bg-zinc-900 px-4 text-zinc-500">of</span>
-                        </div>
-                    </div>
-
-                    <button onclick="alert('Google login komt binnenkort beschikbaar')"
-                            class="mt-6 w-full bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 py-4 rounded-2xl flex items-center justify-center gap-3 transition">
-                        <i class="fa-brands fa-google text-red-500"></i>
-                        <span>Inloggen met Google</span>
-                    </button>
                 </div>
             </div>
 
@@ -113,21 +99,57 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-black py-12 border-t border-zinc-900">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-zinc-500 text-sm">
-                © 2026 FitFlow AI • Een side-project met ❤️ voor betere fitness
-            </p>
-        </div>
-    </footer>
-
     <script>
-        // Tailwind script already loaded
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        // === SUPABASE CONFIGURATIE ===
+        const supabaseUrl = 'https://yjopbpjjusidgmobsazs.supabase.co';     // ← VUL IN
+        const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc';                              // ← VUL IN
+
+        const supabase = Supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+        // Form handling
+        const form = document.getElementById('loginForm');
+        const errorDiv = document.getElementById('errorMessage');
+        const loginButton = document.getElementById('loginButton');
+        const buttonText = document.getElementById('buttonText');
+
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            // Hier komt later je Supabase login code
-            alert('Inloggen... (Supabase integratie volgt)');
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Reset error
+            errorDiv.classList.add('hidden');
+
+            // Loading state
+            loginButton.disabled = true;
+            buttonText.innerHTML = `
+                <i class="fa-solid fa-spinner fa-spin"></i> Bezig met inloggen...
+            `;
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password,
+                });
+
+                if (error) throw error;
+
+                // Succesvol ingelogd
+                console.log('Ingelogd:', data.user);
+                
+                // Redirect naar dashboard (pas aan naar jouw gewenste pagina)
+                window.location.href = 'dashboard.html';   // of 'index.html' of '/app'
+
+            } catch (error) {
+                console.error(error);
+                errorDiv.textContent = error.message || 'Inloggen mislukt. Controleer je gegevens.';
+                errorDiv.classList.remove('hidden');
+            } finally {
+                // Reset button
+                loginButton.disabled = false;
+                buttonText.textContent = 'Inloggen';
+            }
         });
     </script>
 </body>
