@@ -195,53 +195,47 @@
     // ... je bestaande variabelen (currentStep, selectedGoal etc.) blijven hetzelfde
 
     async function submitRegistration() {
-        const naam = document.getElementById('naam').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('wachtwoord').value;
-        const whatsapp = document.getElementById('whatsapp').value.trim();
 
-        if (!naam || !email || !password || !whatsapp || !selectedGoal || !selectedFreq || !selectedLoc) {
-            alert("Vul alsjeblieft alle velden in.");
-            return;
-        }
+  const naam = document.getElementById('naam').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('wachtwoord').value;
+  const whatsapp = document.getElementById('whatsapp').value.trim();
 
-        try {
-            // 1. Account aanmaken via Supabase Auth
-            const { data: authData, error: authError } = await supabase.auth.signUp({
-                email: email,
-                password: password,
-                options: {
-                    data: { naam: naam } // wordt in user_metadata gezet
-                }
-            });
+  if (!naam || !email || !password || !whatsapp || !selectedGoal || !selectedFreq || !selectedLoc) {
+    alert("Vul alles in");
+    return;
+  }
 
-            if (authError) throw authError;
+  try {
 
-            // 2. Profiel aanmaken in profiles tabel
-            if (authData.user) {
-                const { error: profileError } = await supabase
-                    .from('profiles')
-                    .insert({
-                        user_id: authData.user.id,
-                        naam: naam,
-                        whatsapp: whatsapp,
-                        hoofddoel: selectedGoal,
-                        trainingsfrequentie: selectedFreq,
-                        trainingslocatie: selectedLoc
-                    });
+    // ✅ 1 account maken
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password
+    });
 
-                if (profileError) throw profileError;
-            }
+    if (error) throw error;
 
-            // Succes!
-            document.getElementById('success-modal').classList.remove('hidden');
-            console.log("✅ Account succesvol aangemaakt");
+    // ✅ 2 user opslaan
+    await supabase.from("users").insert([{
+      user_id: data.user.id,
+      name: naam,
+      email: email,
+      phone: whatsapp,
+      goal: selectedGoal,
+      level: selectedFreq,
+      location: selectedLoc,
+      subscription_active: false,
+      trial_ends_at: new Date(Date.now()+3*24*60*60*1000)
+    }]);
 
-        } catch (error) {
-            console.error(error);
-            alert("Er ging iets mis: " + error.message);
-        }
-    }
+    document.getElementById("success-modal").classList.remove("hidden");
+
+  } catch (err) {
+    console.error(err);
+    alert("Fout: " + err.message);
+  }
+}
 </script>
 </body>
 </html>
