@@ -277,7 +277,7 @@ async function submitRegistration() {
 
         if (error) throw error;
 
-        await supabase.from('users').insert([{
+        await supabase.from('profiles').insert([{
             user_id: data.user.id,
             name: naam,
             email: email,
