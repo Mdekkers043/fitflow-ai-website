@@ -6,48 +6,30 @@
     <title>Inloggen - FitFlow AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-
         body { font-family: 'Inter', sans-serif; }
         .heading { font-family: 'Space Grotesk', sans-serif; }
-
-        .hero-bg {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-        }
+        .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
     </style>
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
 
-    <!-- NAVBAR -->
     <nav class="fixed top-0 w-full z-50 bg-zinc-950 border-b border-zinc-800">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
                 <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
             </div>
-
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="index.html#hoe" class="hover:text-lime-400 transition">Hoe het werkt</a>
-                <a href="index.html#voorbeelden" class="hover:text-lime-400 transition">Voorbeelden</a>
-                <a href="index.html#prijzen" class="hover:text-lime-400 transition">Prijzen</a>
-                <a href="login.html" class="text-lime-400 font-semibold">Inloggen</a>
-            </div>
-
-            <a href="signup.html" 
-               class="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-lime-400 transition-all hover:scale-105">
-                Start gratis
-            </a>
+            <a href="index.html" class="hover:text-lime-400">Home</a>
         </div>
     </nav>
 
-    <!-- LOGIN FORM -->
     <div class="hero-bg min-h-screen flex items-center justify-center pt-20">
         <div class="max-w-md w-full mx-auto px-6 py-12">
             <div class="bg-zinc-900 rounded-3xl p-10 shadow-2xl border border-zinc-800">
-                
                 <div class="text-center mb-10">
                     <div class="w-16 h-16 bg-lime-500 rounded-2xl flex items-center justify-center text-4xl mx-auto mb-4">💪</div>
                     <h1 class="text-4xl font-bold heading tracking-tight">Welkom terug</h1>
@@ -59,96 +41,53 @@
                 <form id="loginForm" class="space-y-6">
                     <div>
                         <label class="block text-sm font-medium text-zinc-400 mb-2">E-mailadres</label>
-                        <input type="email" id="email" 
-                               class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-5 py-4 text-white outline-none transition"
-                               placeholder="jouw@email.nl" required>
+                        <input type="email" id="email" class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-5 py-4 outline-none" placeholder="jouw@email.nl" required>
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-zinc-400 mb-2">Wachtwoord</label>
-                        <input type="password" id="password" 
-                               class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-5 py-4 text-white outline-none transition"
-                               placeholder="••••••••" required>
-                    </div>
-
-                    <div class="flex justify-end">
-                        <a href="#" class="text-lime-400 hover:text-lime-300 text-sm transition">
-                            Wachtwoord vergeten?
-                        </a>
+                        <input type="password" id="password" class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-5 py-4 outline-none" placeholder="••••••••" required>
                     </div>
 
                     <button type="submit" id="loginButton"
-                            class="w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold text-lg py-5 rounded-2xl transition-all hover:scale-105 flex items-center justify-center gap-2">
+                            class="w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold text-lg py-5 rounded-2xl transition-all hover:scale-105">
                         <span id="buttonText">Inloggen</span>
                     </button>
                 </form>
 
-                <div class="mt-8 text-center">
-                    <p class="text-zinc-400">
-                        Nog geen account? 
-                        <a href="signup.html" class="text-lime-400 hover:text-lime-300 font-medium">Meld je gratis aan</a>
-                    </p>
+                <div class="mt-8 text-center text-zinc-400">
+                    Nog geen account? <a href="signup.html" class="text-lime-400">Meld je aan</a>
                 </div>
-            </div>
-
-            <div class="text-center mt-8">
-                <a href="index.html" class="text-zinc-500 hover:text-zinc-400 text-sm flex items-center justify-center gap-2">
-                    ← Terug naar homepage
-                </a>
             </div>
         </div>
     </div>
 
     <script>
-    // === SUPABASE CONFIGURATIE ===
-    const supabaseUrl = 'https://yjopbpjjusidgmobsazs.supabase.co';
-    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc';
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-    const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+            const loginButton = document.getElementById('loginButton');
+            const buttonText = document.getElementById('buttonText');
 
-    // Form handling
-    const form = document.getElementById('loginForm');
-    const errorDiv = document.getElementById('errorMessage');
-    const loginButton = document.getElementById('loginButton');
-    const buttonText = document.getElementById('buttonText');
+            errorDiv.classList.add('hidden');
+            loginButton.disabled = true;
+            buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Inloggen...`;
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value;
-
-        // Reset error
-        errorDiv.classList.add('hidden');
-
-        // Loading state
-        loginButton.disabled = true;
-        buttonText.innerHTML = `
-            <i class="fa-solid fa-spinner fa-spin"></i> Bezig met inloggen...
-        `;
-
-        try {
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: email,
-                password: password,
-            });
-
-            if (error) throw error;
-
-            console.log('✅ Succesvol ingelogd:', data.user);
-            
-            // Redirect naar dashboard
-            window.location.href = 'dashboard.html';
-
-        } catch (error) {
-            console.error('Login error:', error);
-            errorDiv.textContent = error.message || 'Inloggen mislukt. Controleer je e-mail en wachtwoord.';
-            errorDiv.classList.remove('hidden');
-        } finally {
-            loginButton.disabled = false;
-            buttonText.textContent = 'Inloggen';
-        }
-    });
-</script>
+            try {
+                const { error } = await window.supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+                // Redirect wordt automatisch gedaan door auth.js
+            } catch (error) {
+                errorDiv.textContent = error.message || 'Inloggen mislukt';
+                errorDiv.classList.remove('hidden');
+            } finally {
+                loginButton.disabled = false;
+                buttonText.textContent = 'Inloggen';
+            }
+        });
+    </script>
 </body>
 </html>
