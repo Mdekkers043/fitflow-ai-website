@@ -7,11 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     
-    <!-- Supabase Library -->
+    <!-- BELANGRIJK: Supabase library eerst laden -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <!-- Auth configuratie -->
-    <script src="auth.js"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
@@ -19,7 +16,6 @@
         .heading { font-family: 'Space Grotesk', sans-serif; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
     </style>
-</head>
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
 
@@ -67,33 +63,56 @@
             </div>
         </div>
     </div>
-    
-    <script src="auth.js"></script>
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
 
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+    <!-- SUPABASE INITIALISATIE + LOGIN LOGIC -->
+    <script>
+        // Wacht tot alles geladen is
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const supabaseUrl = 'https://yjopbpjjusidgmobsazs.supabase.co';
+            const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc';
+
+            const supabase = Supabase.createClient(supabaseUrl, supabaseAnonKey);
+            window.supabase = supabase;
+
+            console.log('✅ Supabase geïnitialiseerd');
+
+            // Login form
+            const form = document.getElementById('loginForm');
             const errorDiv = document.getElementById('errorMessage');
             const loginButton = document.getElementById('loginButton');
             const buttonText = document.getElementById('buttonText');
 
-            errorDiv.classList.add('hidden');
-            loginButton.disabled = true;
-            buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Inloggen...`;
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-            try {
-                const { error } = await window.supabase.auth.signInWithPassword({ email, password });
-                if (error) throw error;
-                // Redirect wordt automatisch gedaan door auth.js
-            } catch (error) {
-                errorDiv.textContent = error.message || 'Inloggen mislukt';
-                errorDiv.classList.remove('hidden');
-            } finally {
-                loginButton.disabled = false;
-                buttonText.textContent = 'Inloggen';
-            }
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+
+                errorDiv.classList.add('hidden');
+                loginButton.disabled = true;
+                buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Inloggen...`;
+
+                try {
+                    const { data, error } = await supabase.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+
+                    if (error) throw error;
+
+                    console.log('✅ Ingelogd!', data.user);
+                    window.location.href = 'dashboard.html';
+
+                } catch (error) {
+                    console.error(error);
+                    errorDiv.textContent = error.message || 'Inloggen mislukt. Controleer je gegevens.';
+                    errorDiv.classList.remove('hidden');
+                } finally {
+                    loginButton.disabled = false;
+                    buttonText.textContent = 'Inloggen';
+                }
+            });
         });
     </script>
 </body>
