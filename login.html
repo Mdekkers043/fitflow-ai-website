@@ -23,7 +23,7 @@
                 <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
                 <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
             </div>
-            <a href="index.html" class="text-lime-400 hover:text-white">← Terug</a>
+            <a href="index.html" class="text-lime-400 hover:text-white">← Terug naar homepage</a>
         </div>
     </nav>
 
@@ -37,17 +37,21 @@
                 </div>
 
                 <div id="errorMessage" class="hidden bg-red-500/10 border border-red-500 text-red-400 px-4 py-3 rounded-2xl text-sm mb-6"></div>
-                <div id="status" class="text-xs text-zinc-500 mb-4"></div>
+                <div id="status" class="text-xs text-zinc-500 mb-4 min-h-[20px]"></div>
 
                 <form id="loginForm" class="space-y-6">
                     <div>
-                        <label class="block text-sm font-medium text-zinc-400 mb-2">E-mailadres</label>
-                        <input type="email" id="email" class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-5 py-4 outline-none" placeholder="jouw@email.nl" required>
+                        <label for="email" class="block text-sm font-medium text-zinc-400 mb-2">E-mailadres</label>
+                        <input type="email" id="email" name="email" autocomplete="email"
+                               class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-5 py-4 outline-none" 
+                               placeholder="jouw@email.nl" required>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-zinc-400 mb-2">Wachtwoord</label>
-                        <input type="password" id="password" class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-5 py-4 outline-none" required>
+                        <label for="password" class="block text-sm font-medium text-zinc-400 mb-2">Wachtwoord</label>
+                        <input type="password" id="password" name="password" autocomplete="current-password"
+                               class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-5 py-4 outline-none" 
+                               required>
                     </div>
 
                     <button type="submit" id="loginButton"
@@ -61,7 +65,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            console.log("🚀 Login pagina geladen");
+            console.log("🚀 Login pagina volledig geladen");
 
             const supabase = Supabase.createClient(
                 'https://yjopbpjjusidgmobsazs.supabase.co',
@@ -80,27 +84,28 @@
                 const email = document.getElementById('email').value.trim();
                 const password = document.getElementById('password').value;
 
-                statusDiv.textContent = `Bezig met inloggen als ${email}...`;
+                statusDiv.textContent = `Bezig met inloggen...`;
                 errorDiv.classList.add('hidden');
                 loginButton.disabled = true;
                 buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Inloggen...`;
 
                 try {
-                    console.log("📤 Probeer in te loggen...");
-                    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                    console.log(`📤 Inlogpoging voor: ${email}`);
+                    
+                    const { data, error } = await supabase.auth.signInWithPassword({ 
+                        email, 
+                        password 
+                    });
 
-                    if (error) {
-                        console.error("❌ Supabase Error:", error);
-                        throw error;
-                    }
+                    if (error) throw error;
 
-                    console.log("✅ Succesvol ingelogd!", data.user);
-                    statusDiv.textContent = "✅ Succes! Redirecten naar dashboard...";
+                    console.log("✅ Ingelogd!", data.user.email);
+                    statusDiv.textContent = "✅ Succesvol ingelogd! Redirecten...";
                     window.location.href = "dashboard.html";
 
                 } catch (err) {
-                    console.error("🔥 Catch block:", err);
-                    errorDiv.textContent = err.message || "Inloggen mislukt. Controleer je gegevens.";
+                    console.error("❌ Login mislukt:", err);
+                    errorDiv.textContent = err.message || "Inloggen mislukt. Controleer je e-mail en wachtwoord.";
                     errorDiv.classList.remove('hidden');
                     statusDiv.textContent = "";
                 } finally {
