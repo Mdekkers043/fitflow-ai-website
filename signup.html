@@ -72,7 +72,7 @@ class="w-full mb-4 bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4">
 <input id="whatsapp" placeholder="WhatsApp"
 class="w-full mb-4 bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4">
 
-<button onclick="nextStep()"
+<button function nextStep(){...}"
 class="w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold py-5 rounded-2xl">
 Volgende stap →
 </button>
@@ -85,16 +85,16 @@ Volgende stap →
 <div id="doel-options" class="grid grid-cols-2 gap-3 mb-6"></div>
 
 <div class="grid grid-cols-4 gap-3 mb-6">
-<button onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">2x</button>
-<button onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">3x</button>
-<button onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">4x</button>
-<button onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">5x+</button>
+<button type="button" onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">2x</button>
+<button type="button" onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">3x</button>
+<button type="button" onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">4x</button>
+<button type="button" onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">5x+</button>
 </div>
 
 <div class="grid grid-cols-3 gap-3 mb-6">
-<button onclick="selectLocation(this)" class="loc-btn py-3 border border-zinc-700 rounded-2xl">Thuis</button>
-<button onclick="selectLocation(this)" class="loc-btn py-3 border border-zinc-700 rounded-2xl">Gym</button>
-<button onclick="selectLocation(this)" class="loc-btn py-3 border border-zinc-700 rounded-2xl">Buiten</button>
+<button type="button" onclick="selectLocation(this)" class="loc-btn py-3 border border-zinc-700 rounded-2xl">Thuis</button>
+<button type="button" onclick="selectLocation(this)" class="loc-btn py-3 border border-zinc-700 rounded-2xl">Gym</button>
+<button type="button" onclick="selectLocation(this)" class="loc-btn py-3 border border-zinc-700 rounded-2xl">Buiten</button>
 </div>
 
 <button onclick="submitRegistration()"
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const supabaseClient = supabase.createClient(
     "https://yjopbpjjusidgmobsazs.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc"
 );
 
 // ✅ STATE
