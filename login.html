@@ -23,20 +23,21 @@
                 <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
                 <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
             </div>
+            <a href="index.html" class="text-lime-400 hover:text-white">← Terug naar homepage</a>
         </div>
     </nav>
 
-    <div class="hero-bg min-h-screen flex items-center justify-center pt-20">
-        <div class="max-w-md w-full mx-auto px-6 py-12">
+    <div class="hero-bg min-h-screen flex items-center justify-center pt-24">
+        <div class="max-w-md w-full mx-auto px-6">
             <div class="bg-zinc-900 rounded-3xl p-10 shadow-2xl border border-zinc-800">
                 <div class="text-center mb-10">
                     <div class="w-16 h-16 bg-lime-500 rounded-2xl flex items-center justify-center text-4xl mx-auto mb-4">💪</div>
                     <h1 class="text-4xl font-bold heading tracking-tight">Welkom terug</h1>
-                    <p class="text-zinc-400 mt-3">Log in om je workouts te bekijken</p>
+                    <p class="text-zinc-400 mt-3">Log in om verder te gaan</p>
                 </div>
 
                 <div id="errorMessage" class="hidden bg-red-500/10 border border-red-500 text-red-400 px-4 py-3 rounded-2xl text-sm mb-6"></div>
-                <div id="successMessage" class="hidden bg-green-500/10 border border-green-500 text-green-400 px-4 py-3 rounded-2xl text-sm mb-6"></div>
+                <div id="debugInfo" class="text-xs text-zinc-500 mb-4"></div>
 
                 <form id="loginForm" class="space-y-6">
                     <div>
@@ -46,7 +47,7 @@
 
                     <div>
                         <label class="block text-sm font-medium text-zinc-400 mb-2">Wachtwoord</label>
-                        <input type="password" id="password" class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-5 py-4 outline-none" placeholder="••••••••" required>
+                        <input type="password" id="password" class="w-full bg-zinc-800 border border-zinc-700 focus:border-lime-500 rounded-2xl px-5 py-4 outline-none" required>
                     </div>
 
                     <button type="submit" id="loginButton"
@@ -59,18 +60,18 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             const supabase = Supabase.createClient(
                 'https://yjopbpjjusidgmobsazs.supabase.co',
                 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc'
             );
 
-            console.log('Supabase client aangemaakt');
+            console.log('Supabase client created');
 
             const form = document.getElementById('loginForm');
             const errorDiv = document.getElementById('errorMessage');
-            const successDiv = document.getElementById('successMessage');
-            const loginButton = document.getElementById('loginButton');
+            const debugDiv = document.getElementById('debugInfo');
+            const button = document.getElementById('loginButton');
             const buttonText = document.getElementById('buttonText');
 
             form.addEventListener('submit', async (e) => {
@@ -79,42 +80,33 @@
                 const email = document.getElementById('email').value.trim();
                 const password = document.getElementById('password').value;
 
-                console.log('🔄 Probeer in te loggen met:', email);
-
+                debugDiv.textContent = `Probeer in te loggen met: ${email}`;
                 errorDiv.classList.add('hidden');
-                successDiv.classList.add('hidden');
-                loginButton.disabled = true;
-                buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Inloggen...`;
+                button.disabled = true;
+                buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Bezig...`;
 
                 try {
                     const { data, error } = await supabase.auth.signInWithPassword({
-                        email: email,
-                        password: password
+                        email,
+                        password
                     });
 
-                    console.log('Response van Supabase:', { data, error });
-
                     if (error) {
-                        console.error('Login error:', error);
+                        console.error("Supabase Error:", error);
                         throw error;
                     }
 
-                    console.log('✅ Succesvol ingelogd!', data.user);
-                    successDiv.textContent = 'Ingelogd! Redirecten...';
-                    successDiv.classList.remove('hidden');
-
-                    // Kleine delay zodat je het succesbericht ziet
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 800);
+                    console.log("✅ Login succesvol!", data);
+                    debugDiv.textContent = "Succesvol ingelogd! Redirecten...";
+                    window.location.href = "dashboard.html";
 
                 } catch (err) {
-                    console.error('Catch error:', err);
-                    errorDiv.textContent = err.message || 'Inloggen mislukt';
+                    console.error("Login failed:", err);
+                    errorDiv.textContent = err.message || "Onbekende fout";
                     errorDiv.classList.remove('hidden');
                 } finally {
-                    loginButton.disabled = false;
-                    buttonText.textContent = 'Inloggen';
+                    button.disabled = false;
+                    buttonText.textContent = "Inloggen";
                 }
             });
         });
