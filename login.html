@@ -6,8 +6,6 @@
     <title>Inloggen - FitFlow AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    
-    <!-- BELANGRIJK: Supabase library eerst laden -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
@@ -25,7 +23,6 @@
                 <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
                 <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
             </div>
-            <a href="index.html" class="hover:text-lime-400">Home</a>
         </div>
     </nav>
 
@@ -39,6 +36,7 @@
                 </div>
 
                 <div id="errorMessage" class="hidden bg-red-500/10 border border-red-500 text-red-400 px-4 py-3 rounded-2xl text-sm mb-6"></div>
+                <div id="successMessage" class="hidden bg-green-500/10 border border-green-500 text-green-400 px-4 py-3 rounded-2xl text-sm mb-6"></div>
 
                 <form id="loginForm" class="space-y-6">
                     <div>
@@ -56,30 +54,22 @@
                         <span id="buttonText">Inloggen</span>
                     </button>
                 </form>
-
-                <div class="mt-8 text-center text-zinc-400">
-                    Nog geen account? <a href="signup.html" class="text-lime-400">Meld je aan</a>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- SUPABASE INITIALISATIE + LOGIN LOGIC -->
     <script>
-        // Wacht tot alles geladen is
         document.addEventListener('DOMContentLoaded', () => {
-            
-            const supabaseUrl = 'https://yjopbpjjusidgmobsazs.supabase.co';
-            const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc';
+            const supabase = Supabase.createClient(
+                'https://yjopbpjjusidgmobsazs.supabase.co',
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc'
+            );
 
-            const supabase = Supabase.createClient(supabaseUrl, supabaseAnonKey);
-            window.supabase = supabase;
+            console.log('Supabase client aangemaakt');
 
-            console.log('✅ Supabase geïnitialiseerd');
-
-            // Login form
             const form = document.getElementById('loginForm');
             const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
             const loginButton = document.getElementById('loginButton');
             const buttonText = document.getElementById('buttonText');
 
@@ -89,7 +79,10 @@
                 const email = document.getElementById('email').value.trim();
                 const password = document.getElementById('password').value;
 
+                console.log('🔄 Probeer in te loggen met:', email);
+
                 errorDiv.classList.add('hidden');
+                successDiv.classList.add('hidden');
                 loginButton.disabled = true;
                 buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Inloggen...`;
 
@@ -99,14 +92,25 @@
                         password: password
                     });
 
-                    if (error) throw error;
+                    console.log('Response van Supabase:', { data, error });
 
-                    console.log('✅ Ingelogd!', data.user);
-                    window.location.href = 'dashboard.html';
+                    if (error) {
+                        console.error('Login error:', error);
+                        throw error;
+                    }
 
-                } catch (error) {
-                    console.error(error);
-                    errorDiv.textContent = error.message || 'Inloggen mislukt. Controleer je gegevens.';
+                    console.log('✅ Succesvol ingelogd!', data.user);
+                    successDiv.textContent = 'Ingelogd! Redirecten...';
+                    successDiv.classList.remove('hidden');
+
+                    // Kleine delay zodat je het succesbericht ziet
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 800);
+
+                } catch (err) {
+                    console.error('Catch error:', err);
+                    errorDiv.textContent = err.message || 'Inloggen mislukt';
                     errorDiv.classList.remove('hidden');
                 } finally {
                     loginButton.disabled = false;
