@@ -72,10 +72,12 @@ class="w-full mb-4 bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4">
 <input id="whatsapp" placeholder="WhatsApp"
 class="w-full mb-4 bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4">
 
-<button function nextStep(){...}"
+
+<button type="button" onclick="nextStep()"
 class="w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold py-5 rounded-2xl">
 Volgende stap →
 </button>
+
 
 </div>
 
@@ -149,19 +151,36 @@ btn.type = "button";
 btn.textContent = goal;
 btn.className = "border border-zinc-700 rounded-2xl py-3";
 
-btn.onclick = ()=>{
-selectedGoal = goal;
+
+btn.onclick = () => {
+    document.querySelectorAll('#doel-options button')
+        .forEach(b => b.classList.remove('border-lime-500'));
+
+    btn.classList.add('border-lime-500');
+    selectedGoal = goal;
 };
+
 
 container.appendChild(btn);
 });
 
 // ✅ SELECTS
+
 function selectFreq(btn){
+document.querySelectorAll('.freq-btn').forEach(b =>
+b.classList.remove('border-lime-500')
+);
+btn.classList.add('border-lime-500');
 selectedFreq = btn.textContent;
 }
 
+
+
 function selectLocation(btn){
+document.querySelectorAll('.loc-btn').forEach(b =>
+b.classList.remove('border-lime-500')
+);
+btn.classList.add('border-lime-500');
 selectedLoc = btn.textContent;
 }
 
