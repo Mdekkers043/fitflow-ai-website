@@ -23,7 +23,7 @@
                 <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
                 <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
             </div>
-            <a href="index.html" class="text-lime-400 hover:text-white">← Terug naar homepage</a>
+            <a href="index.html" class="text-lime-400 hover:text-white">← Terug</a>
         </div>
     </nav>
 
@@ -37,7 +37,7 @@
                 </div>
 
                 <div id="errorMessage" class="hidden bg-red-500/10 border border-red-500 text-red-400 px-4 py-3 rounded-2xl text-sm mb-6"></div>
-                <div id="debugInfo" class="text-xs text-zinc-500 mb-4"></div>
+                <div id="status" class="text-xs text-zinc-500 mb-4"></div>
 
                 <form id="loginForm" class="space-y-6">
                     <div>
@@ -60,19 +60,19 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("🚀 Login pagina geladen");
+
             const supabase = Supabase.createClient(
                 'https://yjopbpjjusidgmobsazs.supabase.co',
                 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc'
             );
 
-            console.log('Supabase client created');
-
             const form = document.getElementById('loginForm');
             const errorDiv = document.getElementById('errorMessage');
-            const debugDiv = document.getElementById('debugInfo');
-            const button = document.getElementById('loginButton');
+            const statusDiv = document.getElementById('status');
             const buttonText = document.getElementById('buttonText');
+            const loginButton = document.getElementById('loginButton');
 
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -80,32 +80,31 @@
                 const email = document.getElementById('email').value.trim();
                 const password = document.getElementById('password').value;
 
-                debugDiv.textContent = `Probeer in te loggen met: ${email}`;
+                statusDiv.textContent = `Bezig met inloggen als ${email}...`;
                 errorDiv.classList.add('hidden');
-                button.disabled = true;
-                buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Bezig...`;
+                loginButton.disabled = true;
+                buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Inloggen...`;
 
                 try {
-                    const { data, error } = await supabase.auth.signInWithPassword({
-                        email,
-                        password
-                    });
+                    console.log("📤 Probeer in te loggen...");
+                    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
                     if (error) {
-                        console.error("Supabase Error:", error);
+                        console.error("❌ Supabase Error:", error);
                         throw error;
                     }
 
-                    console.log("✅ Login succesvol!", data);
-                    debugDiv.textContent = "Succesvol ingelogd! Redirecten...";
+                    console.log("✅ Succesvol ingelogd!", data.user);
+                    statusDiv.textContent = "✅ Succes! Redirecten naar dashboard...";
                     window.location.href = "dashboard.html";
 
                 } catch (err) {
-                    console.error("Login failed:", err);
-                    errorDiv.textContent = err.message || "Onbekende fout";
+                    console.error("🔥 Catch block:", err);
+                    errorDiv.textContent = err.message || "Inloggen mislukt. Controleer je gegevens.";
                     errorDiv.classList.remove('hidden');
+                    statusDiv.textContent = "";
                 } finally {
-                    button.disabled = false;
+                    loginButton.disabled = false;
                     buttonText.textContent = "Inloggen";
                 }
             });
