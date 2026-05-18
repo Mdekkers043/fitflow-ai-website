@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FitFlow AI • Account Aanmaken</title>
 
+<!-- ✅ FIX: echte CDN links -->
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
@@ -18,55 +19,87 @@ body { font-family: 'Inter', sans-serif; }
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
 }
 
-.form-step { display: none; }
-.form-step.active { display: block; }
+.form-step {
+    display: none;
+}
+.form-step.active {
+    display: block;
+}
 </style>
 
 </head>
 
 <body class="bg-zinc-950 text-white">
 
+<!-- NAVBAR -->
 <nav class="fixed top-0 w-full z-50">
-<div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black">💪</div>
-<span class="text-2xl font-bold heading">FitFlow AI</span>
-</div>
-<a href="/" class="text-zinc-400 hover:text-white">← Terug naar homepage</a>
-</div>
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black text-xl">💪</div>
+            <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
+        </div>
+        <a href="index.html" class="text-zinc-400 hover:text-white">← Terug naar homepage</a>
+    </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero-bg min-h-screen flex items-center pt-20">
 <div class="max-w-4xl mx-auto px-6 py-12">
 
 <div class="text-center mb-10">
-<h1 class="text-5xl font-bold heading mb-4">
+<h1 class="text-5xl md:text-6xl font-bold heading mb-4">
 Jouw persoonlijke AI-coach<br>
 <span class="text-lime-400">wordt aangemaakt</span>
 </h1>
+<p class="text-zinc-400">Dit duurt nog geen 2 minuten.</p>
 </div>
 
-<div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-800 max-w-2xl mx-auto">
+<!-- FORM -->
+<div class="bg-zinc-900 rounded-3xl p-8 md:p-12 border border-zinc-800 max-w-2xl mx-auto">
 
+<!-- STEP 1 -->
 <div id="step1" class="form-step active">
 
-<input id="naam" placeholder="Naam" class="w-full mb-3 p-3 bg-zinc-800 rounded">
-<input id="email" placeholder="Email" class="w-full mb-3 p-3 bg-zinc-800 rounded">
-<input id="wachtwoord" type="password" placeholder="Wachtwoord" class="w-full mb-3 p-3 bg-zinc-800 rounded">
-<input id="whatsapp" placeholder="WhatsApp" class="w-full mb-3 p-3 bg-zinc-800 rounded">
+<input id="naam" placeholder="Naam"
+class="w-full mb-4 bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4">
 
-<button onclick="nextStep()" class="w-full bg-lime-500 py-3 rounded mt-4">
-Volgende stap
+<input id="email" type="email" placeholder="Email"
+class="w-full mb-4 bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4">
+
+<input id="wachtwoord" type="password" placeholder="Wachtwoord"
+class="w-full mb-4 bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4">
+
+<input id="whatsapp" placeholder="WhatsApp"
+class="w-full mb-4 bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4">
+
+<button onclick="nextStep()"
+class="w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold py-5 rounded-2xl">
+Volgende stap →
 </button>
 
 </div>
 
+<!-- STEP 2 -->
 <div id="step2" class="form-step">
 
-<div id="doel-options" class="grid grid-cols-2 gap-3 mb-4"></div>
+<div id="doel-options" class="grid grid-cols-2 gap-3 mb-6"></div>
 
-<button onclick="submitRegistration()" class="w-full bg-lime-500 py-3 rounded">
-Account aanmaken
+<div class="grid grid-cols-4 gap-3 mb-6">
+<button onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">2x</button>
+<button onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">3x</button>
+<button onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">4x</button>
+<button onclick="selectFreq(this)" class="freq-btn py-3 border border-zinc-700 rounded-2xl">5x+</button>
+</div>
+
+<div class="grid grid-cols-3 gap-3 mb-6">
+<button onclick="selectLocation(this)" class="loc-btn py-3 border border-zinc-700 rounded-2xl">Thuis</button>
+<button onclick="selectLocation(this)" class="loc-btn py-3 border border-zinc-700 rounded-2xl">Gym</button>
+<button onclick="selectLocation(this)" class="loc-btn py-3 border border-zinc-700 rounded-2xl">Buiten</button>
+</div>
+
+<button onclick="submitRegistration()"
+class="w-full bg-lime-500 hover:bg-lime-400 text-black font-semibold py-5 rounded-2xl">
+Account aanmaken & starten
 </button>
 
 </div>
@@ -76,12 +109,15 @@ Account aanmaken
 </div>
 </section>
 
+<!-- SUCCESS -->
 <div id="success-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center">
-<div class="bg-zinc-900 p-8 rounded-3xl">
-<h2 class="text-2xl mb-4">✅ Account aangemaakt</h2>
+<div class="bg-zinc-900 p-10 rounded-3xl text-center">
+<h2 class="text-2xl mb-4">✅ Account succesvol aangemaakt</h2>
+<a href="index.html" class="bg-lime-500 px-6 py-3 rounded text-black">Ga verder</a>
 </div>
 </div>
 
+<!-- ✅ Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -89,30 +125,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const supabaseClient = supabase.createClient(
     "https://yjopbpjjusidgmobsazs.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 );
 
+// ✅ STATE
 let selectedGoal = '';
+let selectedFreq = '';
+let selectedLoc = '';
 
+// ✅ NAV
 function nextStep(){
 document.getElementById('step1').classList.remove('active');
 document.getElementById('step2').classList.add('active');
 }
 
+// ✅ GOALS
 const goals = ["Afvallen","Spiermassa","Kracht","Conditie","Fitter"];
-
 const container = document.getElementById("doel-options");
 
 goals.forEach(goal=>{
-let b = document.createElement("button");
-b.textContent = goal;
-b.className = "border border-zinc-700 rounded p-3";
-b.onclick = ()=>{
+let btn = document.createElement("button");
+btn.type = "button";
+btn.textContent = goal;
+btn.className = "border border-zinc-700 rounded-2xl py-3";
+
+btn.onclick = ()=>{
 selectedGoal = goal;
 };
-container.appendChild(b);
+
+container.appendChild(btn);
 });
 
+// ✅ SELECTS
+function selectFreq(btn){
+selectedFreq = btn.textContent;
+}
+
+function selectLocation(btn){
+selectedLoc = btn.textContent;
+}
+
+// ✅ SUBMIT (GEFIXT)
 async function submitRegistration(){
 
 const naam = document.getElementById('naam').value;
@@ -120,7 +173,7 @@ const email = document.getElementById('email').value;
 const password = document.getElementById('wachtwoord').value;
 const whatsapp = document.getElementById('whatsapp').value;
 
-if(!naam || !email || !password || !whatsapp || !selectedGoal){
+if(!naam || !email || !password || !whatsapp || !selectedGoal || !selectedFreq || !selectedLoc){
 alert("Vul alles in");
 return;
 }
@@ -133,9 +186,9 @@ password
 });
 
 if(error) throw error;
-if(!data.user) throw new Error("User niet aangemaakt");
+if(!data.user) throw new Error("Signup mislukt");
 
-// ✅ FIX BELANGRIJK
+// ✅ OPSLAAN PROFIEL
 const { error: profileError } = await supabaseClient
 .from('profiles')
 .insert([{
@@ -143,7 +196,9 @@ id: data.user.id,
 name: naam,
 email: email,
 phone: whatsapp,
-goal: selectedGoal
+goal: selectedGoal,
+days_per_week: selectedFreq,
+location: selectedLoc
 }]);
 
 if(profileError) throw profileError;
@@ -152,11 +207,15 @@ document.getElementById('success-modal').classList.remove('hidden');
 
 }catch(err){
 console.error(err);
-alert(err.message);
-}
+alert("Fout: " + err.message);
 }
 
+}
+
+// ✅ GLOBAL
 window.nextStep = nextStep;
+window.selectFreq = selectFreq;
+window.selectLocation = selectLocation;
 window.submitRegistration = submitRegistration;
 
 });
