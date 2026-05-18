@@ -7,7 +7,7 @@ const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseAnonKey);
 
 // Globaal beschikbaar maken
-window.supabase = supabaseClient;
+window.supabase = supabase.createClient(URL, KEY);
 
 console.log("✅ Supabase initialized");
 
