@@ -4,40 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - FitFlow AI</title>
+
+    <!-- Styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Jouw auth.js -->
     <script src="auth.js"></script>
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .heading { font-family: 'Space Grotesk', sans-serif; }
-    </style>
 </head>
+
 <body class="bg-zinc-950 text-white min-h-screen">
 
-    <nav class="fixed top-0 w-full z-50 bg-zinc-950 border-b border-zinc-800">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-2xl">💪</div>
-                <span class="text-2xl font-bold heading tracking-tighter">FitFlow AI</span>
-            </div>
-            <button onclick="logout()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-6 py-2 rounded-2xl">Uitloggen</button>
-        </div>
-    </nav>
+<!-- Header -->
+<div class="flex justify-between items-center p-6 border-b border-zinc-800">
 
-    <div class="pt-28 max-w-4xl mx-auto px-6">
-        <h1 class="text-5xl font-bold heading">Welkom terug!</h1>
-        <p id="userEmail" class="text-zinc-400 mt-2"></p>
+    <h1 class="text-2xl font-bold">Dashboard</h1>
 
-        <div class="mt-10 bg-zinc-900 rounded-3xl p-10">
-            <h2 class="text-2xl font-semibold mb-6">Je bent succesvol ingelogd 🎉</h2>
-            <p class="text-zinc-300">Dit is je dashboard. Hier komen later je workouts, progressie etc.</p>
-        </div>
-    </div>
-    
-    <script src="auth.js"></script>
-   <script>
+    <!-- ✅ Logout knop -->
+    <button onclick="logout()"
+        class="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-6 py-2 rounded-2xl">
+        Uitloggen
+    </button>
+
+</div>
+
+<!-- Content -->
+<div class="p-6">
+    <h2 class="text-xl mb-2">Welkom 👋</h2>
+    <p class="text-zinc-400">Je bent succesvol ingelogd.</p>
+</div>
+
+<!-- ✅ SCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+
+    if (!window.supabase) {
+        console.error("❌ Supabase niet geladen");
+        return;
+    }
+
+    const supabase = window.supabase;
+
+    // ✅ CHECK OF USER INGELOGD IS
+    const { data, error } = await supabase.auth.getSession();
+
+    console.log("SESSION:", data);
+
+    if (!data.session) {
+        console.log("❌ Geen sessie → redirect");
+        window.location.href = "index.html";
+        return;
+    }
+
+    console.log("✅ Gebruiker is ingelogd");
+
+});
+
+
+// ✅ LOGOUT FUNCTIE
 async function logout() {
 
     if (!window.supabase) {
@@ -54,27 +80,13 @@ async function logout() {
 
         console.log("✅ Uitgelogd");
 
-        // ✅ Redirect naar homepage
+        // ✅ Redirect
         window.location.href = "index.html";
 
     } catch (err) {
         console.error("❌ Logout fout:", err.message);
     }
 }
-</script>
-    
-<script>
-document.addEventListener('DOMContentLoaded', async () => {
-
-    const supabase = window.supabase;
-
-    const { data } = await supabase.auth.getSession();
-
-    if (!data.session) {
-        window.location.href = "index.html";
-    }
-
-});
 </script>
 
 </body>
