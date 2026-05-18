@@ -1,92 +1,239 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - FitFlow AI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<title>Profiel - FitFlow AI</title>
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Styling -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Jouw auth.js -->
-    <script src="auth.js"></script>
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+
 </head>
 
 <body class="bg-zinc-950 text-white min-h-screen">
 
-<!-- Header -->
-<div class="flex justify-between items-center p-6 border-b border-zinc-800">
+<!-- ✅ NAVBAR -->
+<div class="flex justify-between items-center px-6 py-5 border-b border-zinc-800">
 
-    <h1 class="text-2xl font-bold">Dashboard</h1>
+    <!-- ✅ LOGO LINKS -->
+    <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-lime-500 rounded-2xl flex items-center justify-center text-black font-bold text-xl">💪</div>
+        <span class="text-xl font-bold">FitFlow AI</span>
+    </div>
 
-    <!-- ✅ Logout knop -->
-    <button onclick="logout()"
-        class="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-6 py-2 rounded-2xl">
-        Uitloggen
+    <!-- ✅ TERUG KNOP -->
+    <a href="index.html"
+       class="text-lime-400 hover:text-white">
+        ← Terug naar homepage
+    </a>
+</div>
+
+
+<div class="max-w-5xl mx-auto p-6">
+
+<!-- ✅ WELKOM -->
+<h1 class="text-3xl font-bold mb-6">
+    Welkom <span id="welcomeName">...</span> 👋
+</h1>
+
+
+<!-- ACCOUNT -->
+<div class="bg-zinc-900 p-6 rounded-2xl mb-6">
+    <h2 class="text-xl mb-4">Account</h2>
+
+    <p><strong>Email:</strong> <span id="email"></span></p>
+
+    <p class="mt-2">
+        <strong>Naam:</strong>
+        <input id="name" class="bg-zinc-800 p-2 rounded ml-2">
+    </p>
+
+    <p class="mt-2">
+        <strong>Abonnement:</strong>
+        <span id="subscription"></span>
+    </p>
+
+    <button onclick="saveProfile()"
+        class="mt-4 bg-lime-500 text-black px-4 py-2 rounded">
+        Opslaan
     </button>
+</div>
+
+
+<!-- TRAININGEN -->
+<div class="bg-zinc-900 p-6 rounded-2xl mb-6">
+    <h2 class="text-xl mb-4">🏋️ Trainingen</h2>
+    <p>Aantal trainingen: <span id="workoutCount">0</span></p>
+</div>
+
+
+<!-- WACHTWOORD WIJZIGEN -->
+<div class="bg-zinc-900 p-6 rounded-2xl mb-6">
+    <h2 class="text-xl mb-4">🔑 Wachtwoord wijzigen</h2>
+
+    <input type="password" id="newPassword"
+        placeholder="Nieuw wachtwoord"
+        class="bg-zinc-800 p-2 rounded w-full mb-3">
+
+    <button onclick="changePassword()"
+        class="bg-blue-500 px-4 py-2 rounded">
+        Wachtwoord wijzigen
+    </button>
+</div>
+
+
+<!-- BETALINGEN -->
+<div class="bg-zinc-900 p-6 rounded-2xl mb-6">
+    <h2 class="text-xl mb-4">💳 Betalingen</h2>
+    <ul id="paymentsList" class="space-y-2"></ul>
+</div>
+
+
+<!-- ABONNEMENT OPZEGGEN -->
+<div class="bg-zinc-900 p-6 rounded-2xl border border-red-500/20">
+    <h2 class="text-xl mb-4 text-red-400">⚠️ Abonnement</h2>
+
+    <p class="text-zinc-400 mb-4">
+        In de toekomst kun je hier je abonnement beheren of opzeggen.
+    </p>
+
+    <button onclick="cancelSubscription()"
+        class="bg-red-500 px-4 py-2 rounded">
+        Abonnement opzeggen (coming soon)
+    </button>
+</div>
 
 </div>
 
-<!-- Content -->
-<div class="p-6">
-    <h2 class="text-xl mb-2">Welkom 👋</h2>
-    <p class="text-zinc-400">Je bent succesvol ingelogd.</p>
-</div>
 
-<!-- ✅ SCRIPT -->
 <script>
-document.addEventListener('DOMContentLoaded', async () => {
+let userId;
 
-    if (!window.supabase) {
-        console.error("❌ Supabase niet geladen");
-        return;
-    }
+document.addEventListener('DOMContentLoaded', async () => {
 
     const supabase = window.supabase;
 
-    // ✅ CHECK OF USER INGELOGD IS
-    const { data, error } = await supabase.auth.getSession();
-
-    console.log("SESSION:", data);
+    const { data } = await supabase.auth.getSession();
 
     if (!data.session) {
-        console.log("❌ Geen sessie → redirect");
         window.location.href = "index.html";
         return;
     }
 
-    console.log("✅ Gebruiker is ingelogd");
+    userId = data.session.user.id;
 
+    loadProfile();
+    loadWorkouts();
+    loadPayments();
 });
 
 
-// ✅ LOGOUT FUNCTIE
-async function logout() {
+// ✅ PROFIEL LADEN
+async function loadProfile() {
+    const supabase = window.supabase;
 
-    if (!window.supabase) {
-        console.error("❌ Supabase niet geladen");
+    const { data } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
+
+    document.getElementById('email').textContent = data.email;
+    document.getElementById('name').value = data.name || "";
+    document.getElementById('subscription').textContent = data.subscription || "free";
+
+    document.getElementById('welcomeName').textContent =
+        data.name || data.email;
+}
+
+
+// ✅ OPSLAAN
+async function saveProfile() {
+    const supabase = window.supabase;
+
+    const name = document.getElementById('name').value;
+
+    await supabase
+        .from('profiles')
+        .update({ name })
+        .eq('id', userId);
+
+    alert("✅ Opgeslagen");
+}
+
+
+// ✅ TRAININGEN
+async function loadWorkouts() {
+    const supabase = window.supabase;
+
+    const { count } = await supabase
+        .from('workouts')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', userId);
+
+    document.getElementById('workoutCount').textContent = count || 0;
+}
+
+
+// ✅ BETALINGEN
+async function loadPayments() {
+    const supabase = window.supabase;
+
+    const { data } = await supabase
+        .from('payments')
+        .select('*')
+        .eq('user_id', userId);
+
+    const list = document.getElementById('paymentsList');
+
+    list.innerHTML = "";
+
+    if (!data || data.length === 0) {
+        list.innerHTML = "<li>Geen betalingen</li>";
         return;
     }
 
+    data.forEach(p => {
+        const li = document.createElement('li');
+        li.textContent = `€${p.amount} - ${p.status}`;
+        list.appendChild(li);
+    });
+}
+
+
+// ✅ WACHTWOORD WIJZIGEN
+async function changePassword() {
     const supabase = window.supabase;
 
-    try {
-        const { error } = await supabase.auth.signOut();
+    const newPassword = document.getElementById('newPassword').value;
 
-        if (error) throw error;
+    if (!newPassword) {
+        alert("Voer een wachtwoord in");
+        return;
+    }
 
-        console.log("✅ Uitgelogd");
+    const { error } = await supabase.auth.updateUser({
+        password: newPassword
+    });
 
-        // ✅ Redirect
-        window.location.href = "index.html";
-
-    } catch (err) {
-        console.error("❌ Logout fout:", err.message);
+    if (error) {
+        alert(error.message);
+    } else {
+        alert("✅ Wachtwoord gewijzigd");
     }
 }
+
+
+// ✅ ABONNEMENT OPZEGGEN (placeholder)
+function cancelSubscription() {
+    alert("🚧 Dit wordt later gekoppeld aan Stripe / betalingen");
+}
+
 </script>
 
 </body>
