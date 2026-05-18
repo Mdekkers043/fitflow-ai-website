@@ -68,11 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const supabase = window.supabase;
 
-    const form = document.getElementById('signupForm');
+    const form = document.getElementById('loginForm');
     const errorDiv = document.getElementById('errorMessage');
     const statusDiv = document.getElementById('status');
     const buttonText = document.getElementById('buttonText');
-    const button = document.getElementById('signupButton');
+    const loginButton = document.getElementById('loginButton');
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -81,37 +81,44 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('password').value;
 
         errorDiv.classList.add('hidden');
-        statusDiv.textContent = "Account aanmaken...";
-        button.disabled = true;
+        statusDiv.textContent = "Bezig met inloggen...";
 
-        buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Bezig...`;
+        loginButton.disabled = true;
+        buttonText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Inloggen...`;
 
         try {
-            const { data, error } = await supabase.auth.signUp({
+            const { data, error } = await supabase.auth.signInWithPassword({
                 email,
                 password
             });
 
+            console.log("RESULT:", data, error);
+
             if (error) throw error;
 
-            console.log("✅ Account aangemaakt:", data);
+            if (!data.user) {
+                throw new Error("Geen gebruiker gevonden");
+            }
 
-            statusDiv.textContent = "✅ Gelukt! Doorsturen...";
+            statusDiv.textContent = "✅ Ingelogd!";
             window.location.href = "dashboard.html";
 
         } catch (err) {
-            console.error(err);
+            console.error("LOGIN ERROR:", err);
 
-            errorDiv.textContent = err.message || "Signup mislukt";
+            errorDiv.textContent =
+                err.message || "Controleer je e-mail en wachtwoord";
+
             errorDiv.classList.remove('hidden');
             statusDiv.textContent = "";
         } finally {
-            button.disabled = false;
-            buttonText.textContent = "Account maken";
+            loginButton.disabled = false;
+            buttonText.textContent = "Inloggen";
         }
     });
 
 });
+
 </script>
 
 </body>
