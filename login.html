@@ -100,57 +100,55 @@
     </div>
 
     <script>
-        // === SUPABASE CONFIGURATIE ===
-        const supabaseUrl = 'https://yjopbpjjusidgmobsazs.supabase.co';     // ← VUL IN
-        const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc';                              // ← VUL IN
+    // === SUPABASE CONFIGURATIE ===
+    const supabaseUrl = 'https://yjopbpjjusidgmobsazs.supabase.co';
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlqb3BicGpqdXNpZGdtb2JzYXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzIxMjgsImV4cCI6MjA5NDU0ODEyOH0.kBWUtet80YvCan3bbUfLzxMfAu0ekitejiDv3D5oIwc';
 
-        const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
+    const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
 
-        // Form handling
-        const form = document.getElementById('loginForm');
-        const errorDiv = document.getElementById('errorMessage');
-        const loginButton = document.getElementById('loginButton');
-        const buttonText = document.getElementById('buttonText');
+    // Form handling
+    const form = document.getElementById('loginForm');
+    const errorDiv = document.getElementById('errorMessage');
+    const loginButton = document.getElementById('loginButton');
+    const buttonText = document.getElementById('buttonText');
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
 
-            // Reset error
-            errorDiv.classList.add('hidden');
+        // Reset error
+        errorDiv.classList.add('hidden');
 
-            // Loading state
-            loginButton.disabled = true;
-            buttonText.innerHTML = `
-                <i class="fa-solid fa-spinner fa-spin"></i> Bezig met inloggen...
-            `;
+        // Loading state
+        loginButton.disabled = true;
+        buttonText.innerHTML = `
+            <i class="fa-solid fa-spinner fa-spin"></i> Bezig met inloggen...
+        `;
 
-            try {
-                const { data, error } = await supabase.auth.signInWithPassword({
-                    email: email,
-                    password: password,
-                });
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password,
+            });
 
-                if (error) throw error;
+            if (error) throw error;
 
-                // Succesvol ingelogd
-                console.log('Ingelogd:', data.user);
-                
-                // Redirect naar dashboard (pas aan naar jouw gewenste pagina)
-                window.location.href = 'dashboard.html';   // of 'index.html' of '/app'
+            console.log('✅ Succesvol ingelogd:', data.user);
+            
+            // Redirect naar dashboard
+            window.location.href = 'dashboard.html';
 
-            } catch (error) {
-                console.error(error);
-                errorDiv.textContent = error.message || 'Inloggen mislukt. Controleer je gegevens.';
-                errorDiv.classList.remove('hidden');
-            } finally {
-                // Reset button
-                loginButton.disabled = false;
-                buttonText.textContent = 'Inloggen';
-            }
-        });
-    </script>
+        } catch (error) {
+            console.error('Login error:', error);
+            errorDiv.textContent = error.message || 'Inloggen mislukt. Controleer je e-mail en wachtwoord.';
+            errorDiv.classList.remove('hidden');
+        } finally {
+            loginButton.disabled = false;
+            buttonText.textContent = 'Inloggen';
+        }
+    });
+</script>
 </body>
 </html>
