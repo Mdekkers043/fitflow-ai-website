@@ -1,5 +1,4 @@
 <!-- auth.js -->
-<script>
     // Wacht tot Supabase geladen is
     function initSupabase() {
         if (typeof Supabase === 'undefined') {
@@ -30,4 +29,3 @@
 
     // Voer init uit zodra de pagina geladen is
     window.addEventListener('load', initSupabase);
-</script>
